@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { FILMS } from './data/films.json';
-import { SPECIES } from '../species/data/species.json';
+import { FILMS } from 'src/data/films.json';
+import { SPECIES } from 'src/data/species.json';
 
 @Injectable()
 export class FilmsService {

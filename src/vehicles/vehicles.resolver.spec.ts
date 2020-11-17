@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { SpeciesResolver } from 'src/species/species.resolver';
+import { FilmsService } from 'src/films/films.service';
+import { PeopleService } from 'src/people/people.service';
 import { VehiclesResolver } from './vehicles.resolver';
 import { VehiclesService } from './vehicles.service';
 
@@ -8,7 +9,12 @@ describe('VehiclesResolver', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [VehiclesResolver, VehiclesService],
+      providers: [
+        VehiclesResolver,
+        VehiclesService,
+        PeopleService,
+        FilmsService,
+      ],
     }).compile();
 
     resolver = module.get<VehiclesResolver>(VehiclesResolver);

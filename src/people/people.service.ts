@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { PEOPLE } from './data/people.json';
-import { SPECIES } from '../species/data/species.json';
+import { PEOPLE } from 'src/data/people.json';
+import { SPECIES } from 'src/data/species.json';
 
 @Injectable()
 export class PeopleService {

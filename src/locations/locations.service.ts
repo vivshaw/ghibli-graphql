@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { LOCATIONS } from './data/locations.json';
+import { LOCATIONS } from 'src/data/locations.json';
 
 @Injectable()
 export class LocationsService {
