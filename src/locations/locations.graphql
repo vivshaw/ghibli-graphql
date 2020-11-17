@@ -1,0 +1,12 @@
+type Location {
+  id: String!
+  name: String!
+  climate: String!
+  terrain: String!
+  surface_water: Int!
+}
+
+type Query {
+  locations: [Location]
+  location(id: String!): Location
+}

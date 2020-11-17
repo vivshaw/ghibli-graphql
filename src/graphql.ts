@@ -19,10 +19,20 @@ export interface Film {
 export interface IQuery {
     films(): Film[] | Promise<Film[]>;
     film(id: string): Film | Promise<Film>;
+    locations(): Location[] | Promise<Location[]>;
+    location(id: string): Location | Promise<Location>;
     species(): Species[] | Promise<Species[]>;
     specie(id: string): Species | Promise<Species>;
     vehicles(): Vehicle[] | Promise<Vehicle[]>;
     vehicle(id: string): Vehicle | Promise<Vehicle>;
+}
+
+export interface Location {
+    id: string;
+    name: string;
+    climate: string;
+    terrain: string;
+    surface_water: number;
 }
 
 export interface Species {
