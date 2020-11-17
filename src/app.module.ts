@@ -7,6 +7,7 @@ import { join } from 'path';
 import { VehiclesModule } from './vehicles/vehicles.module';
 import { SpeciesModule } from './species/species.module';
 import { LocationsModule } from './locations/locations.module';
+import { PeopleModule } from './people/people.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { LocationsModule } from './locations/locations.module';
     FilmsModule,
     VehiclesModule,
     SpeciesModule,
-    LocationsModule
+    LocationsModule,
+    PeopleModule
   ],
   controllers: [AppController],
   providers: [AppService],
