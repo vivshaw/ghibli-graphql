@@ -3,6 +3,6 @@ import { SpeciesService } from './species.service';
 import { SpeciesResolver } from './species.resolver';
 
 @Module({
-  providers: [SpeciesService, SpeciesResolver]
+  providers: [SpeciesService, SpeciesResolver],
 })
 export class SpeciesModule {}

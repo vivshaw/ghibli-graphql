@@ -1,9 +1,9 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 import { SpeciesService } from './species.service';
 
-@Resolver("Species")
+@Resolver('Species')
 export class SpeciesResolver {
-  constructor(private speciesService: SpeciesService) { }
+  constructor(private speciesService: SpeciesService) {}
 
   @Query()
   species() {

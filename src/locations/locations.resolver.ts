@@ -1,9 +1,9 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 import { LocationsService } from './locations.service';
 
-@Resolver("Location")
+@Resolver('Location')
 export class LocationsResolver {
-  constructor(private locationsService: LocationsService) { }
+  constructor(private locationsService: LocationsService) {}
 
   @Query()
   locations() {

@@ -1,9 +1,9 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 import { FilmsService } from './films.service';
 
-@Resolver("Film")
+@Resolver('Film')
 export class FilmsResolver {
-  constructor(private filmsService: FilmsService) { }
+  constructor(private filmsService: FilmsService) {}
 
   @Query()
   films() {

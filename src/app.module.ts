@@ -21,7 +21,7 @@ import { PeopleModule } from './people/people.module';
     LocationsModule,
     PeopleModule,
     SpeciesModule,
-    VehiclesModule
+    VehiclesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

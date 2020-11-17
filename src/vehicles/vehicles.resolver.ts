@@ -4,11 +4,13 @@ import { Vehicle } from 'src/graphql';
 import { PeopleService } from 'src/people/people.service';
 import { VehiclesService } from './vehicles.service';
 
-@Resolver("Vehicle")
+@Resolver('Vehicle')
 export class VehiclesResolver {
-  constructor(private vehiclesService: VehiclesService,
+  constructor(
+    private vehiclesService: VehiclesService,
     private filmsService: FilmsService,
-    private peopleService: PeopleService) { }
+    private peopleService: PeopleService,
+  ) {}
 
   @Query()
   vehicles() {

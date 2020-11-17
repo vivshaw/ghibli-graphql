@@ -3,6 +3,6 @@ import { FilmsService } from './films.service';
 import { FilmsResolver } from './films.resolver';
 
 @Module({
-  providers: [FilmsService, FilmsResolver]
+  providers: [FilmsService, FilmsResolver],
 })
 export class FilmsModule {}

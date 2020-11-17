@@ -5,6 +5,6 @@ import { PeopleService } from 'src/people/people.service';
 import { FilmsService } from 'src/films/films.service';
 
 @Module({
-  providers: [VehiclesService, VehiclesResolver, PeopleService, FilmsService]
+  providers: [VehiclesService, VehiclesResolver, PeopleService, FilmsService],
 })
 export class VehiclesModule {}

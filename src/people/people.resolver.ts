@@ -1,9 +1,9 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 import { PeopleService } from './people.service';
 
-@Resolver("Person")
+@Resolver('Person')
 export class PeopleResolver {
-  constructor(private peopleService: PeopleService) { }
+  constructor(private peopleService: PeopleService) {}
 
   @Query()
   people() {
