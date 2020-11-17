@@ -4,6 +4,8 @@ type Location {
   climate: String!
   terrain: String!
   surface_water: Int!
+  films: [Film]!
+  residents: [Person]
 }
 
 type Query {

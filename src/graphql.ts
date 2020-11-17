@@ -35,6 +35,8 @@ export interface Location {
     climate: string;
     terrain: string;
     surface_water: number;
+    films: Film[];
+    residents?: Person[];
 }
 
 export interface Person {

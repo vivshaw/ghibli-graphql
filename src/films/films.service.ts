@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { FILMS } from 'src/data/films.json';
+import { Film } from 'src/graphql';
+import { LocationModel } from 'src/locations/location.model';
 import { PersonModel } from 'src/people/person.model';
 import { SpeciesModel } from 'src/species/species.model';
 import { VehicleModel } from 'src/vehicles/vehicle.model';
@@ -37,6 +39,14 @@ export class FilmsService {
   getFilmsByPerson(person: PersonModel): Promise<any> {
     return new Promise((resolve) => {
       const films = person.films.map((filmId) => this.getFilmById(filmId));
+
+      resolve(films);
+    });
+  }
+
+  getFilmsByLocation(location: LocationModel): Promise<any> {
+    return new Promise((resolve) => {
+      const films = location.films.map((filmId) => this.getFilmById(filmId));
 
       resolve(films);
     });

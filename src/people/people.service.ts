@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PEOPLE } from 'src/data/people.json';
+import { LocationModel } from 'src/locations/location.model';
 import { SpeciesModel } from 'src/species/species.model';
 import { VehicleModel } from 'src/vehicles/vehicle.model';
 
@@ -28,6 +29,16 @@ export class PeopleService {
   getPeopleBySpecies(species: SpeciesModel): Promise<any> {
     return new Promise((resolve) => {
       const people = species.people.map((personId) =>
+        this.getPersonById(personId),
+      );
+
+      resolve(people);
+    });
+  }
+
+  getPeopleByLocation(location: LocationModel): Promise<any> {
+    return new Promise((resolve) => {
+      const people = location.residents.map((personId) =>
         this.getPersonById(personId),
       );
 
