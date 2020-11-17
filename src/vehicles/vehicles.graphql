@@ -4,6 +4,8 @@ type Vehicle {
   description: String!
   vehicle_class: String!
   length: Int!
+  pilot: Person!
+  film: Film!
 }
 
 type Query {

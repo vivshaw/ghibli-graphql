@@ -60,4 +60,6 @@ export interface Vehicle {
     description: string;
     vehicle_class: string;
     length: number;
+    pilot: Person;
+    film: Film;
 }
