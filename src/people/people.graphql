@@ -2,9 +2,11 @@ type Person {
   id: String!
   name: String!
   gender: String!
-  age: Int!
+  age: String!
   eye_color: String!
   hair_color: String!
+  films: [Film]!
+  species: Species!
 }
 
 type Query {

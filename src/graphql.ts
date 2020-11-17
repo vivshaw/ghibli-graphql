@@ -41,9 +41,11 @@ export interface Person {
     id: string;
     name: string;
     gender: string;
-    age: number;
+    age: string;
     eye_color: string;
     hair_color: string;
+    films: Film[];
+    species: Species;
 }
 
 export interface Species {

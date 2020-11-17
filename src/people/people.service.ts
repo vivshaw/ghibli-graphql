@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { PEOPLE } from 'src/data/people.json';
-import { SPECIES } from 'src/data/species.json';
+import { SpeciesModel } from 'src/species/species.model';
+import { VehicleModel } from 'src/vehicles/vehicle.model';
 
 @Injectable()
 export class PeopleService {
   people = PEOPLE;
-  species = SPECIES;
 
   getPeople(): Promise<any> {
     return new Promise((resolve) => {
@@ -19,15 +19,14 @@ export class PeopleService {
     });
   }
 
-  getPersonByVehicleId(id: string): Promise<any> {
+  getPersonByVehicle(vehicle: VehicleModel): Promise<any> {
     return new Promise((resolve) => {
-      resolve(this.people.find((person) => person.pilotOf.includes(id)));
+      resolve(this.getPersonById(vehicle.pilot));
     });
   }
 
-  getPeopleBySpecies(id: string): Promise<any> {
+  getPeopleBySpecies(species: SpeciesModel): Promise<any> {
     return new Promise((resolve) => {
-      const species = this.species.find((specie) => specie.id === id);
       const people = species.people.map((personId) =>
         this.getPersonById(personId),
       );

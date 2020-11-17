@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { FILMS } from 'src/data/films.json';
-import { SPECIES } from 'src/data/species.json';
+import { PersonModel } from 'src/people/person.model';
+import { SpeciesModel } from 'src/species/species.model';
+import { VehicleModel } from 'src/vehicles/vehicle.model';
 
 @Injectable()
 export class FilmsService {
   films = FILMS;
-  species = SPECIES;
 
   getFilms(): Promise<any> {
     return new Promise((resolve) => {
@@ -19,16 +20,23 @@ export class FilmsService {
     });
   }
 
-  getFilmByVehicleId(id: string): Promise<any> {
+  getFilmByVehicle(vehicle: VehicleModel): Promise<any> {
     return new Promise((resolve) => {
-      resolve(this.films.find((film) => film.vehicles.includes(id)));
+      resolve(this.getFilmById(vehicle.film));
     });
   }
 
-  getFilmsBySpeciesId(id: string): Promise<any> {
+  getFilmsBySpecies(species: SpeciesModel): Promise<any> {
     return new Promise((resolve) => {
-      const species = this.species.find((specie) => specie.id === id);
       const films = species.films.map((filmId) => this.getFilmById(filmId));
+
+      resolve(films);
+    });
+  }
+
+  getFilmsByPerson(person: PersonModel): Promise<any> {
+    return new Promise((resolve) => {
+      const films = person.films.map((filmId) => this.getFilmById(filmId));
 
       resolve(films);
     });
