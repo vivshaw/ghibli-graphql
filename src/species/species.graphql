@@ -1,0 +1,12 @@
+type Species {
+  id: String!
+  name: String!
+  classification: String!
+  eye_colors: String!
+  hair_colors: String!
+}
+
+type Query {
+  species: [Species]
+  specie(id: String!): Species
+}

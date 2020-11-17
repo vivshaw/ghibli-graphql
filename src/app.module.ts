@@ -5,6 +5,7 @@ import { FilmsModule } from './films/films.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { VehiclesModule } from './vehicles/vehicles.module';
+import { SpeciesModule } from './species/species.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { VehiclesModule } from './vehicles/vehicles.module';
       },
     }),
     FilmsModule,
-    VehiclesModule
+    VehiclesModule,
+    SpeciesModule
   ],
   controllers: [AppController],
   providers: [AppService],

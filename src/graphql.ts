@@ -19,8 +19,18 @@ export interface Film {
 export interface IQuery {
     films(): Film[] | Promise<Film[]>;
     film(id: string): Film | Promise<Film>;
+    species(): Species[] | Promise<Species[]>;
+    specie(id: string): Species | Promise<Species>;
     vehicles(): Vehicle[] | Promise<Vehicle[]>;
     vehicle(id: string): Vehicle | Promise<Vehicle>;
+}
+
+export interface Species {
+    id: string;
+    name: string;
+    classification: string;
+    eye_colors: string;
+    hair_colors: string;
 }
 
 export interface Vehicle {
