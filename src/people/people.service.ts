@@ -13,7 +13,13 @@ export class PeopleService {
 
   getPersonById(id: String): Promise<any> {
     return new Promise(resolve => {
-      resolve(this.people.find(film => film.id === id));
+      resolve(this.people.find(person => person.id === id));
+    })
+  }
+
+  getPersonByVehicleId(id: string): Promise<any> {
+    return new Promise(resolve => {
+      resolve(this.people.find(person => person.pilotOf.includes(id)))
     })
   }
 }

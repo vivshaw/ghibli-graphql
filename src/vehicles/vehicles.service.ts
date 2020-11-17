@@ -7,8 +7,6 @@ import { VEHICLES }  from "./data/vehicles.json";
 export class VehiclesService {
   vehicles = VEHICLES;
 
-  constructor(private peopleService: PeopleService, private filmService: FilmsService) { }
-
   getVehicles(): Promise<any> {
     return new Promise(resolve => {
       resolve(this.vehicles);
@@ -18,20 +16,6 @@ export class VehiclesService {
   getVehicleById(id: String): Promise<any> {
     return new Promise(resolve => {
       resolve(this.vehicles.find(vehicle => vehicle.id === id));
-    })
-  }
-
-  getPilotByVehicleId(id: String): Promise<any> {
-    return new Promise(resolve => {
-      const { pilot } = this.vehicles.find(vehicle => vehicle.id === id);
-      resolve(this.peopleService.getPersonById(pilot));
-    })
-  }
-
-  getFilmByVehicleId(id: String): Promise<any> {
-    return new Promise(resolve => {
-      const { film } = this.vehicles.find(vehicle => vehicle.id === id);
-      resolve(this.filmService.getFilmById(film));
     })
   }
 }

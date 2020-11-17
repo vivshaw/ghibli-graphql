@@ -16,4 +16,10 @@ export class FilmsService {
       resolve(this.films.find(film => film.id === id));
     })
   }
+
+  getFilmByVehicleId(id: string): Promise<any> {
+    return new Promise(resolve => {
+      resolve(this.films.find(film => film.vehicles.includes(id)))
+    })
+  }
 }
