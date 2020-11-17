@@ -1,0 +1,12 @@
+type Vehicle {
+  id: String!
+  name: String!
+  description: String!
+  vehicle_class: String!
+  length: Int!
+}
+
+type Query {
+  vehicles: [Vehicle]
+  vehicle(id: String!): Vehicle
+}

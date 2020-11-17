@@ -19,4 +19,14 @@ export interface Film {
 export interface IQuery {
     films(): Film[] | Promise<Film[]>;
     film(id: string): Film | Promise<Film>;
+    vehicles(): Vehicle[] | Promise<Vehicle[]>;
+    vehicle(id: string): Vehicle | Promise<Vehicle>;
+}
+
+export interface Vehicle {
+    id: string;
+    name: string;
+    description: string;
+    vehicle_class: string;
+    length: number;
 }
