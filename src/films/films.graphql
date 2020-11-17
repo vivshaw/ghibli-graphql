@@ -1,0 +1,14 @@
+type Film {
+  id: String!
+  title: String!
+  description: String!
+  director: String!
+  producer: String!
+  release_date: Int!
+  rt_score: Int!
+}
+
+type Query {
+  films: [Film]
+  film(id: String!): Film
+}
