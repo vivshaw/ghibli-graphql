@@ -6,6 +6,10 @@ type Film {
   producer: String!
   release_date: Int!
   rt_score: Int!
+  people: [Person]!
+  species: [Species]!
+  locations: [Location]
+  vehicles: [Vehicle]
 }
 
 type Query {

@@ -14,6 +14,10 @@ export interface Film {
     producer: string;
     release_date: number;
     rt_score: number;
+    people: Person[];
+    species: Species[];
+    locations?: Location[];
+    vehicles?: Vehicle[];
 }
 
 export interface IQuery {
