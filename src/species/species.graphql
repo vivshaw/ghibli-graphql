@@ -4,6 +4,8 @@ type Species {
   classification: String!
   eye_colors: String!
   hair_colors: String!
+  films: [Film]!
+  people: [Person]!
 }
 
 type Query {

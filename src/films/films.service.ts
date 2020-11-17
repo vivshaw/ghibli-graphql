@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { FILMS } from './data/films.json';
+import { SPECIES } from '../species/data/species.json';
 
 @Injectable()
 export class FilmsService {
   films = FILMS;
+  species = SPECIES;
 
   getFilms(): Promise<any> {
     return new Promise((resolve) => {
@@ -20,6 +22,15 @@ export class FilmsService {
   getFilmByVehicleId(id: string): Promise<any> {
     return new Promise((resolve) => {
       resolve(this.films.find((film) => film.vehicles.includes(id)));
+    });
+  }
+
+  getFilmsBySpeciesId(id: string): Promise<any> {
+    return new Promise((resolve) => {
+      const species = this.species.find((specie) => specie.id === id);
+      const films = species.films.map((filmId) => this.getFilmById(filmId));
+
+      resolve(films);
     });
   }
 }
