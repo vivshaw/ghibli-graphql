@@ -5,7 +5,7 @@
       "name": "Irontown",
       "climate": "Continental",
       "terrain": "Mountain",
-      "surface_water": "40",
+      "surface_water": 40,
       "residents": [
         "ba924631-068e-4436-b6de-f3283fa848f0",
         "030555b3-4c92-4fce-93fb-e70c3ae3df8b"
@@ -17,7 +17,7 @@
       "name": "Gutiokipanja",
       "climate": "Continental",
       "terrain": "Hill",
-      "surface_water": "50",
+      "surface_water": 50,
       "residents": [
         "ba924631-068e-4436-b6de-f3283fa848f0",
         "030555b3-4c92-4fce-93fb-e70c3ae3df8b"
@@ -29,7 +29,7 @@
       "name": "The Cat Kingdom",
       "climate": "Continental",
       "terrain": "Plain",
-      "surface_water": "30",
+      "surface_water": 30,
       "residents": [
         "6b3facea-ea33-47b1-96ce-3fc737b119b8",
         "3042818d-a8bb-4cba-8180-c19249822d57",
@@ -44,7 +44,7 @@
       "name": "The Marsh House",
       "climate": "Mild",
       "terrain": "Marsh",
-      "surface_water": "60",
+      "surface_water": 60,
       "residents": [],
       "films": ["5fdfb320-2a02-49a7-94ff-5ca418cae602"]
     },
@@ -53,7 +53,7 @@
       "name": "Hospital",
       "climate": "Continental",
       "terrain": "Hill",
-      "surface_water": "40",
+      "surface_water": 40,
       "residents": ["TODO"],
       "films": ["58611129-2dbc-4a81-a72f-77ddfc1b1b49"]
     },
@@ -62,7 +62,7 @@
       "name": "Gondoa",
       "climate": "TODO",
       "terrain": "TODO",
-      "surface_water": "40",
+      "surface_water": 40,
       "residents": ["TODO"],
       "films": ["2baf70d1-42bb-4437-b551-e5fed5a87abe"]
     },
@@ -71,7 +71,7 @@
       "name": "Ursula's Log Cabin",
       "climate": "TODO",
       "terrain": "TODO",
-      "surface_water": "40",
+      "surface_water": 40,
       "residents": ["TODO"],
       "films": ["ea660b10-85c4-4ae3-8a5f-41cea3648e3e"]
     },
@@ -80,7 +80,7 @@
       "name": "Zeniba's Cottage",
       "climate": "TODO",
       "terrain": "TODO",
-      "surface_water": "40",
+      "surface_water": 40,
       "residents": ["TODO"],
       "films": ["dc2e6bd1-8156-4886-adff-b39e6043af0c"]
     },
@@ -89,7 +89,7 @@
       "name": "Bamboo Forest",
       "climate": "Tropical",
       "terrain": "Forest",
-      "surface_water": "10",
+      "surface_water": 10,
       "residents": ["TODO"],
       "films": [
         "45204234-adfd-45cb-a505-a8e7a676b114",
@@ -101,7 +101,7 @@
       "name": "Pazu's Mines",
       "climate": "Dry",
       "terrain": "Hill",
-      "surface_water": "0",
+      "surface_water": 0,
       "residents": ["TODO"],
       "films": ["2baf70d1-42bb-4437-b551-e5fed5a87abe"]
     },
@@ -110,7 +110,7 @@
       "name": "Shizuku's Apartment",
       "climate": "Continental",
       "terrain": "City",
-      "surface_water": "0",
+      "surface_water": 0,
       "residents": ["TODO"],
       "films": ["ff24da26-a969-4f0e-ba1e-a122ead6c6e3"]
     },
@@ -119,7 +119,7 @@
       "name": "Laputa",
       "climate": "Continental",
       "terrain": "City",
-      "surface_water": "40",
+      "surface_water": 40,
       "residents": ["TODO"],
       "films": ["2baf70d1-42bb-4437-b551-e5fed5a87abe"]
     },
@@ -128,7 +128,7 @@
       "name": "Tedis",
       "climate": "Continental",
       "terrain": "Hill",
-      "surface_water": "30",
+      "surface_water": 30,
       "residents": ["TODO"],
       "films": ["2baf70d1-42bb-4437-b551-e5fed5a87abe"]
     },
@@ -137,7 +137,7 @@
       "name": "Koriko",
       "climate": "Mild",
       "terrain": "Hill",
-      "surface_water": "50",
+      "surface_water": 50,
       "residents": ["TODO"],
       "films": ["ea660b10-85c4-4ae3-8a5f-41cea3648e3e"]
     },
@@ -146,7 +146,7 @@
       "name": "Forest",
       "climate": "Tropical",
       "terrain": "Forest",
-      "surface_water": "60",
+      "surface_water": 60,
       "residents": ["TODO"],
       "films": ["0440483e-ca0e-4120-8c50-4c8cd9b965d6"]
     },
@@ -155,7 +155,7 @@
       "name": "Bathhouse",
       "climate": "Continental",
       "terrain": "River",
-      "surface_water": "70",
+      "surface_water": 70,
       "residents": ["TODO"],
       "films": ["dc2e6bd1-8156-4886-adff-b39e6043af0c"]
     },
@@ -164,7 +164,7 @@
       "name": "Matsugo",
       "climate": "Continental",
       "terrain": "River",
-      "surface_water": "60",
+      "surface_water": 60,
       "residents": ["TODO"],
       "films": ["58611129-2dbc-4a81-a72f-77ddfc1b1b49"]
     },
@@ -173,7 +173,7 @@
       "name": "Taeko's House",
       "climate": "Continental",
       "terrain": "River",
-      "surface_water": "40",
+      "surface_water": 40,
       "residents": ["TODO"],
       "films": ["4e236f34-b981-41c3-8c65-f8c9000b94e7"]
     },
@@ -182,7 +182,7 @@
       "name": "Piccolo S.P.A.",
       "climate": "Continental",
       "terrain": "River",
-      "surface_water": "40",
+      "surface_water": 40,
       "residents": ["TODO"],
       "films": ["ebbb6b7c-945c-41ee-a792-de0e43191bd8"]
     },
@@ -191,7 +191,7 @@
       "name": "Karikiya",
       "climate": "Mild",
       "terrain": "City",
-      "surface_water": "30",
+      "surface_water": 30,
       "residents": ["TODO"],
       "films": ["ea660b10-85c4-4ae3-8a5f-41cea3648e3e"]
     },
@@ -200,7 +200,7 @@
       "name": "Satsuki's School House",
       "climate": "Mild",
       "terrain": "River",
-      "surface_water": "60",
+      "surface_water": 60,
       "residents": ["TODO"],
       "films": ["58611129-2dbc-4a81-a72f-77ddfc1b1b49"]
     },
@@ -209,7 +209,7 @@
       "name": "Fujimoto's Underwater Harbor",
       "climate": "Wet",
       "terrain": "Ocean",
-      "surface_water": "100",
+      "surface_water": 100,
       "residents": ["TODO"],
       "films": ["758bf02e-3122-46e0-884e-67cf83df1786"]
     },
@@ -218,7 +218,7 @@
       "name": "Himawari Nursery School",
       "climate": "Mild",
       "terrain": "Ocean",
-      "surface_water": "50",
+      "surface_water": 50,
       "residents": ["TODO"],
       "films": ["758bf02e-3122-46e0-884e-67cf83df1786"]
     },
@@ -227,7 +227,7 @@
       "name": "Ingary",
       "climate": "Mild",
       "terrain": "Hill",
-      "surface_water": "30",
+      "surface_water": 30,
       "residents": ["TODO"],
       "films": ["cd3d059c-09f4-4ff3-8d63-bc765a5184fa"]
     }

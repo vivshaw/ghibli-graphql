@@ -4,7 +4,7 @@ type Film {
   description: String!
   director: String!
   producer: String!
-  release_date: Int!
+  release_date: String!
   rt_score: Int!
   people: [Person]!
   species: [Species]!

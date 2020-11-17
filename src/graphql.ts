@@ -12,7 +12,7 @@ export interface Film {
     description: string;
     director: string;
     producer: string;
-    release_date: number;
+    release_date: string;
     rt_score: number;
     people: Person[];
     species: Species[];

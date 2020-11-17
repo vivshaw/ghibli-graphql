@@ -1,54 +1,42 @@
 import { Injectable } from '@nestjs/common';
 import { FILMS } from 'src/data/films.json';
-import { Film } from 'src/graphql';
 import { LocationModel } from 'src/locations/location.model';
 import { PersonModel } from 'src/people/person.model';
 import { SpeciesModel } from 'src/species/species.model';
 import { VehicleModel } from 'src/vehicles/vehicle.model';
+import { FilmModel } from './film.model';
 
 @Injectable()
 export class FilmsService {
   films = FILMS;
 
-  getFilms(): Promise<any> {
-    return new Promise((resolve) => {
-      resolve(this.films);
-    });
+  async getFilms(): Promise<FilmModel[]> {
+    return this.films;
   }
 
-  getFilmById(id: String): Promise<any> {
-    return new Promise((resolve) => {
-      resolve(this.films.find((film) => film.id === id));
-    });
+  async getFilmById(id: String): Promise<FilmModel> {
+    return this.films.find((film) => film.id === id);
   }
 
-  getFilmByVehicle(vehicle: VehicleModel): Promise<any> {
-    return new Promise((resolve) => {
-      resolve(this.getFilmById(vehicle.film));
-    });
+  async getFilmByVehicle(vehicle: VehicleModel): Promise<FilmModel> {
+    return this.getFilmById(vehicle.film);
   }
 
-  getFilmsBySpecies(species: SpeciesModel): Promise<any> {
-    return new Promise((resolve) => {
-      const films = species.films.map((filmId) => this.getFilmById(filmId));
+  async getFilmsBySpecies(species: SpeciesModel): Promise<FilmModel[]> {
+    const films = species.films.map((filmId) => this.getFilmById(filmId));
 
-      resolve(films);
-    });
+    return Promise.all(films);
   }
 
-  getFilmsByPerson(person: PersonModel): Promise<any> {
-    return new Promise((resolve) => {
-      const films = person.films.map((filmId) => this.getFilmById(filmId));
+  async getFilmsByPerson(person: PersonModel): Promise<FilmModel[]> {
+    const films = await person.films.map((filmId) => this.getFilmById(filmId));
 
-      resolve(films);
-    });
+    return Promise.all(films);
   }
 
-  getFilmsByLocation(location: LocationModel): Promise<any> {
-    return new Promise((resolve) => {
-      const films = location.films.map((filmId) => this.getFilmById(filmId));
+  async getFilmsByLocation(location: LocationModel): Promise<FilmModel[]> {
+    const films = location.films.map((filmId) => this.getFilmById(filmId));
 
-      resolve(films);
-    });
+    return Promise.all(films);
   }
 }

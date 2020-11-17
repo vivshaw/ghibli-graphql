@@ -4,52 +4,41 @@ import { FilmModel } from 'src/films/film.model';
 import { LocationModel } from 'src/locations/location.model';
 import { SpeciesModel } from 'src/species/species.model';
 import { VehicleModel } from 'src/vehicles/vehicle.model';
+import { PersonModel } from './person.model';
 
 @Injectable()
 export class PeopleService {
   people = PEOPLE;
 
-  getPeople(): Promise<any> {
-    return new Promise((resolve) => {
-      resolve(this.people);
-    });
+  async getPeople(): Promise<PersonModel[]> {
+    return this.people;
   }
 
-  getPersonById(id: String): Promise<any> {
-    return new Promise((resolve) => {
-      resolve(this.people.find((person) => person.id === id));
-    });
+  async getPersonById(id: String): Promise<PersonModel> {
+    return this.people.find((person) => person.id === id);
   }
 
-  getPersonByVehicle(vehicle: VehicleModel): Promise<any> {
-    return new Promise((resolve) => {
-      resolve(this.getPersonById(vehicle.pilot));
-    });
+  async getPersonByVehicle(vehicle: VehicleModel): Promise<PersonModel> {
+    return this.getPersonById(vehicle.pilot);
   }
 
-  getPeopleBySpecies(species: SpeciesModel): Promise<any> {
-    return new Promise((resolve) => {
-      const people = species.people.map((personId) =>
-        this.getPersonById(personId),
-      );
+  async getPeopleBySpecies(species: SpeciesModel): Promise<PersonModel[]> {
+    const people = species.people.map((personId) =>
+      this.getPersonById(personId),
+    );
 
-      resolve(people);
-    });
+    return Promise.all(people);
   }
 
-  getPeopleByLocation(location: LocationModel): Promise<any> {
-    return new Promise((resolve) => {
-      const people = location.residents.map((personId) =>
-        this.getPersonById(personId),
-      );
+  async getPeopleByLocation(location: LocationModel): Promise<PersonModel[]> {
+    const people = location.residents.map((personId) =>
+      this.getPersonById(personId),
+    );
 
-      resolve(people);
-    });
+    return Promise.all(people);
   }
 
-  getPeopleByFilm(film: FilmModel): Promise<any> {
-    return new Promise((resolve) => {
-      resolve(this.people.filter((person) => person.films.includes(film.id)));
-    });
+  async getPeopleByFilm(film: FilmModel): Promise<PersonModel[]> {
+    return this.people.filter((person) => person.films.includes(film.id));
   }
 }
