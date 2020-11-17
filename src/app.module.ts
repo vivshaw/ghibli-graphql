@@ -18,10 +18,10 @@ import { PeopleModule } from './people/people.module';
       },
     }),
     FilmsModule,
-    VehiclesModule,
-    SpeciesModule,
     LocationsModule,
-    PeopleModule
+    PeopleModule,
+    SpeciesModule,
+    VehiclesModule
   ],
   controllers: [AppController],
   providers: [AppService],
