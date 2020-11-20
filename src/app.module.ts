@@ -16,7 +16,8 @@ import { PeopleModule } from './people/people.module';
       definitions: {
         path: join(process.cwd(), 'src/graphql.ts'),
       },
-      playground: true
+      playground: true,
+      introspection: true
     }),
     FilmsModule,
     LocationsModule,
