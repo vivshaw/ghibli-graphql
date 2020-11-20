@@ -76,6 +76,6 @@
   },
   "main": "dist/main.js",
   "engines": {
-    "node": "8"
+    "node": "12.18.2"
   }
 }
