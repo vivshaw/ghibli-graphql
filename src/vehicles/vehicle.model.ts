@@ -1,9 +1,44 @@
-export interface VehicleModel {
+import { Field, ObjectType } from '@nestjs/graphql';
+import { Film } from 'src/films/film.model';
+import { Person } from 'src/people/person.model';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+
+@ObjectType()
+@Entity()
+export class Vehicle {
+  @Field()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Field()
+  @Column('varchar', { length: 500, nullable: false })
   name: string;
+
+  @Field()
+  @Column('text', { nullable: false })
   description: string;
+
+  @Field()
+  @Column('varchar', { length: 20, nullable: false })
   vehicle_class: string;
+
+  @Field()
+  @Column('number', { nullable: false })
   length: number;
-  pilot: string;
-  film: string;
+
+  @Field()
+  @OneToOne(() => Person)
+  @JoinColumn()
+  pilot: Person;
+
+  @Field()
+  @ManyToOne(() => Film)
+  film: Film;
 }

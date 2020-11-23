@@ -11,7 +11,7 @@ export class VehiclesService {
     return this.vehicles;
   }
 
-  async getVehicleById(id: String): Promise<VehicleModel> {
+  async getVehicleById(id: string): Promise<VehicleModel> {
     return this.vehicles.find((vehicle) => vehicle.id === id);
   }
 

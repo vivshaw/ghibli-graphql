@@ -18,7 +18,7 @@ export class VehiclesResolver {
   }
 
   @Query()
-  vehicle(@Args('id') id: String) {
+  vehicle(@Args('id') id: string) {
     return this.vehiclesService.getVehicleById(id);
   }
 
