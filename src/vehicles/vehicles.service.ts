@@ -1,21 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { VEHICLES } from 'src/data/vehicles.json';
-import { FilmModel } from 'src/films/film.model';
-import { VehicleModel } from './vehicle.model';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Vehicle } from './vehicle.model';
 
 @Injectable()
 export class VehiclesService {
-  vehicles = VEHICLES;
+  constructor(
+    @InjectRepository(Vehicle)
+    private vehicleRepository: Repository<Vehicle>,
+  ) {}
 
-  async getVehicles(): Promise<VehicleModel[]> {
-    return this.vehicles;
+  async all(): Promise<Vehicle[]> {
+    return this.vehicleRepository.find();
   }
 
-  async getVehicleById(id: string): Promise<VehicleModel> {
-    return this.vehicles.find((vehicle) => vehicle.id === id);
-  }
-
-  async getVehiclesByFilm(film: FilmModel): Promise<VehicleModel[]> {
-    return this.vehicles.filter((vehicle) => vehicle.film === film.id);
+  async find(id: string): Promise<Vehicle> {
+    return this.vehicleRepository.findOne(id);
   }
 }

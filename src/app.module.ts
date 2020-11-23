@@ -7,6 +7,11 @@ import { SpeciesModule } from './species/species.module';
 import { LocationsModule } from './locations/locations.module';
 import { PeopleModule } from './people/people.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Vehicle } from './vehicles/vehicle.model';
+import { Film } from './films/film.model';
+import { Person } from './people/person.model';
+import { Location } from './locations/location.model';
+import { Species } from './species/species.model';
 
 @Module({
   imports: [
@@ -22,7 +27,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'postgres',
       password: 'postgressword',
       database: 'jiburi-nest',
-      entities: ['dist/**/*.model.js'],
+      entities: [Film, Location, Person, Species, Vehicle],
       synchronize: false,
     }),
     FilmsModule,

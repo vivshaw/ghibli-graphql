@@ -1,23 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { LOCATIONS } from 'src/data/locations.json';
-import { FilmModel } from 'src/films/film.model';
-import { LocationModel } from './location.model';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Location } from './location.model';
 
 @Injectable()
 export class LocationsService {
-  locations = LOCATIONS;
+  constructor(
+    @InjectRepository(Location)
+    private locationRepository: Repository<Location>,
+  ) {}
 
-  async getLocations(): Promise<LocationModel[]> {
-    return this.locations;
+  async all(): Promise<Location[]> {
+    return this.locationRepository.find();
   }
 
-  async getLocationById(id: string): Promise<LocationModel> {
-    return this.locations.find((location) => location.id === id);
-  }
-
-  async getLocationsByFilm(film: FilmModel): Promise<LocationModel[]> {
-    return this.locations.filter((location) =>
-      location.films.includes(film.id),
-    );
+  async find(id: string): Promise<Location> {
+    return this.locationRepository.findOne(id);
   }
 }
