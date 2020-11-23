@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { LocationsService } from './locations.service';
 import { LocationsResolver } from './locations.resolver';
-import { Location } from 'graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Location } from './location.model';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Location])],

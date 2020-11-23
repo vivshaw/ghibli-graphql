@@ -5,6 +5,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -29,12 +30,12 @@ export class Location {
   terrain: string;
 
   @Field()
-  @Column('number', { nullable: false })
+  @Column('int', { nullable: false })
   surface_water: number;
 
   @Field(() => [Person], { nullable: false })
   @ManyToMany(() => Person)
-  @JoinColumn()
+  @JoinTable()
   residents: Person[];
 
   @Field(() => [Film], { nullable: false })

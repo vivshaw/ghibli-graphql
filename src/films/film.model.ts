@@ -7,6 +7,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -36,20 +37,20 @@ export class Film {
   producer: string;
 
   @Field()
-  @Column('number', { nullable: false })
+  @Column('int', { nullable: false })
   release_date: number;
 
   @Field()
-  @Column('number', { nullable: false })
+  @Column('int', { nullable: false })
   rt_score: number;
 
-  @Field(() => [Vehicle], { nullable: false })
+  @Field(() => [Vehicle], { nullable: true })
   @OneToMany(() => Vehicle, (vehicle) => vehicle.film)
   vehicles: Vehicle[];
 
   @Field(() => [Person], { nullable: false })
   @ManyToMany(() => Person, (person) => person.films)
-  @JoinColumn()
+  @JoinTable()
   people: Person[];
 
   @Field(() => [Species], { nullable: false })
@@ -59,6 +60,6 @@ export class Film {
 
   @Field(() => [Location], { nullable: false })
   @ManyToMany(() => Location, (location) => location.films)
-  @JoinColumn()
+  @JoinTable()
   location: Location[];
 }

@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Location } from 'graphql';
+import { Location } from 'src/locations/location.model';
 import { Film } from 'src/films/film.model';
 import { Species } from 'src/species/species.model';
 import {
@@ -7,8 +7,10 @@ import {
   Entity,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Vehicle } from 'src/vehicles/vehicle.model';
 
 @ObjectType()
 @Entity()
@@ -26,7 +28,7 @@ export class Person {
   gender: string;
 
   @Field()
-  @Column('number', { nullable: false })
+  @Column('int', { nullable: false })
   age: number;
 
   @Field()
@@ -41,11 +43,15 @@ export class Person {
   @ManyToMany(() => Film, (film) => film.people)
   films: Film[];
 
-  @Field()
+  @Field(() => Species)
   @ManyToOne(() => Species, (species) => species.people)
   species: Species;
 
-  @Field(() => [Location], { nullable: false })
+  @Field(() => [Location], { nullable: true })
   @ManyToMany(() => Location)
   locations: Location[];
+
+  @Field(() => [Vehicle], { nullable: true })
+  @OneToMany(() => Vehicle, (vehicle) => vehicle.pilot)
+  pilotOf: Vehicle[];
 }

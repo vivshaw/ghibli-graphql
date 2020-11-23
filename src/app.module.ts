@@ -7,11 +7,7 @@ import { SpeciesModule } from './species/species.module';
 import { LocationsModule } from './locations/locations.module';
 import { PeopleModule } from './people/people.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Vehicle } from './vehicles/vehicle.model';
-import { Film } from './films/film.model';
-import { Person } from './people/person.model';
-import { Location } from './locations/location.model';
-import { Species } from './species/species.model';
+import { DefaultAdminModule } from 'nestjs-admin';
 
 @Module({
   imports: [
@@ -20,21 +16,13 @@ import { Species } from './species/species.model';
       playground: true,
       introspection: true,
     }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'postgressword',
-      database: 'jiburi-nest',
-      entities: [Film, Location, Person, Species, Vehicle],
-      synchronize: false,
-    }),
+    TypeOrmModule.forRoot(),
     FilmsModule,
     LocationsModule,
     PeopleModule,
     SpeciesModule,
     VehiclesModule,
+    DefaultAdminModule,
   ],
 })
 export class AppModule {}

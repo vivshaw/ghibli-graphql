@@ -30,15 +30,15 @@ export class Vehicle {
   vehicle_class: string;
 
   @Field()
-  @Column('number', { nullable: false })
+  @Column('int', { nullable: false })
   length: number;
 
-  @Field()
+  @Field(() => Person)
   @OneToOne(() => Person)
   @JoinColumn()
   pilot: Person;
 
-  @Field()
+  @Field(() => Film)
   @ManyToOne(() => Film)
   film: Film;
 }

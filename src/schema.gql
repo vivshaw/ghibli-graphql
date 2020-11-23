@@ -1,0 +1,73 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Species {
+  id: String!
+  name: String!
+  classification: String!
+  eye_colors: String!
+  hair_colors: String!
+  films: [Film!]!
+  people: [Person!]!
+}
+
+type Vehicle {
+  id: String!
+  name: String!
+  description: String!
+  vehicle_class: String!
+  length: Float!
+  pilot: Person!
+  film: Film!
+}
+
+type Person {
+  id: String!
+  name: String!
+  gender: String!
+  age: Float!
+  eye_color: String!
+  hair_color: String!
+  films: [Film!]!
+  species: Species!
+  locations: [Location!]!
+  pilotOf: [Vehicle!]!
+}
+
+type Location {
+  id: String!
+  name: String!
+  climate: String!
+  terrain: String!
+  surface_water: Float!
+  residents: [Person!]!
+  films: [Film!]!
+}
+
+type Film {
+  id: String!
+  title: String!
+  description: String!
+  director: String!
+  producer: String!
+  release_date: Float!
+  rt_score: Float!
+  vehicles: [Vehicle!]!
+  people: [Person!]!
+  species: [Species!]!
+  location: [Location!]!
+}
+
+type Query {
+  films: [Film!]!
+  film(id: String!): Film!
+  vehicles: [Vehicle!]!
+  vehicle(id: String!): Vehicle!
+  species: [Species!]!
+  specie(id: String!): Species!
+  locations: [Location!]!
+  location(id: String!): Location!
+  people: [Person!]!
+  person(id: String!): Person!
+}
