@@ -1,48 +1,17 @@
-import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
-import { LocationsService } from 'src/locations/locations.service';
-import { PeopleService } from 'src/people/people.service';
-import { SpeciesService } from 'src/species/species.service';
-import { VehiclesService } from 'src/vehicles/vehicles.service';
-import { FilmModel } from './film.model';
+import { Resolver, Query, Args } from '@nestjs/graphql';
 import { FilmsService } from './films.service';
 
 @Resolver('Film')
 export class FilmsResolver {
-  constructor(
-    private filmsService: FilmsService,
-    private peopleService: PeopleService,
-    private speciesService: SpeciesService,
-    private locationsService: LocationsService,
-    private vehiclesService: VehiclesService,
-  ) {}
+  constructor(private filmsService: FilmsService) {}
 
   @Query()
   films() {
-    return this.filmsService.getFilms();
+    return this.filmsService.all();
   }
 
   @Query()
   film(@Args('id') id: string) {
-    return this.filmsService.getFilmById(id);
-  }
-
-  @ResolveField()
-  people(@Parent() film: FilmModel) {
-    return this.peopleService.getPeopleByFilm(film);
-  }
-
-  @ResolveField()
-  species(@Parent() film: FilmModel) {
-    return this.speciesService.getSpeciesByFilm(film);
-  }
-
-  @ResolveField()
-  locations(@Parent() film: FilmModel) {
-    return this.locationsService.getLocationsByFilm(film);
-  }
-
-  @ResolveField()
-  vehicles(@Parent() film: FilmModel) {
-    return this.vehiclesService.getVehiclesByFilm(film);
+    return this.filmsService.find(id);
   }
 }
