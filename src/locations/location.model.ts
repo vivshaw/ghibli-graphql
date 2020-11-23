@@ -4,6 +4,6 @@ export interface LocationModel {
   climate: string;
   terrain: string;
   surface_water: number;
-  residents: String[];
-  films: String[];
+  residents: string[];
+  films: string[];
 }

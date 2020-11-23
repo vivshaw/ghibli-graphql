@@ -1,6 +1,5 @@
 import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
 import { FilmsService } from 'src/films/films.service';
-import { Species } from 'src/graphql';
 import { PeopleService } from 'src/people/people.service';
 import { SpeciesModel } from './species.model';
 import { SpeciesService } from './species.service';
@@ -19,13 +18,12 @@ export class SpeciesResolver {
   }
 
   @Query()
-  specie(@Args('id') id: String) {
+  specie(@Args('id') id: string) {
     return this.speciesService.getSpecieById(id);
   }
 
   @ResolveField()
   films(@Parent() species: SpeciesModel) {
-    const { id } = species;
     return this.filmsService.getFilmsBySpecies(species);
   }
 

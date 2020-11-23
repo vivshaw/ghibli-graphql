@@ -18,7 +18,7 @@ export class LocationsResolver {
   }
 
   @Query()
-  location(@Args('id') id: String) {
+  location(@Args('id') id: string) {
     return this.locationsService.getLocationById(id);
   }
 

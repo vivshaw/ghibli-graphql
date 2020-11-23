@@ -18,7 +18,7 @@ export class PeopleResolver {
   }
 
   @Query()
-  person(@Args('id') id: String) {
+  person(@Args('id') id: string) {
     return this.peopleService.getPersonById(id);
   }
 

@@ -12,7 +12,7 @@ export class SpeciesService {
     return this.species;
   }
 
-  async getSpecieById(id: String): Promise<SpeciesModel> {
+  async getSpecieById(id: string): Promise<SpeciesModel> {
     return this.species.find((specie) => specie.id === id);
   }
 

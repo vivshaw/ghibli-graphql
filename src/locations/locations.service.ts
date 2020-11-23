@@ -11,7 +11,7 @@ export class LocationsService {
     return this.locations;
   }
 
-  async getLocationById(id: String): Promise<LocationModel> {
+  async getLocationById(id: string): Promise<LocationModel> {
     return this.locations.find((location) => location.id === id);
   }
 

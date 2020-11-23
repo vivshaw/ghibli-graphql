@@ -22,7 +22,7 @@ export class FilmsResolver {
   }
 
   @Query()
-  film(@Args('id') id: String) {
+  film(@Args('id') id: string) {
     return this.filmsService.getFilmById(id);
   }
 

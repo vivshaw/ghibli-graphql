@@ -14,7 +14,7 @@ export class PeopleService {
     return this.people;
   }
 
-  async getPersonById(id: String): Promise<PersonModel> {
+  async getPersonById(id: string): Promise<PersonModel> {
     return this.people.find((person) => person.id === id);
   }
 

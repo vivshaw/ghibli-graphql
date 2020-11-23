@@ -14,7 +14,7 @@ export class FilmsService {
     return this.films;
   }
 
-  async getFilmById(id: String): Promise<FilmModel> {
+  async getFilmById(id: string): Promise<FilmModel> {
     return this.films.find((film) => film.id === id);
   }
 

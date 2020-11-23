@@ -4,6 +4,6 @@ export interface VehicleModel {
   description: string;
   vehicle_class: string;
   length: number;
-  pilot: String;
-  film: String;
+  pilot: string;
+  film: string;
 }
