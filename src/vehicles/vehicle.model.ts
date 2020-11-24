@@ -39,6 +39,6 @@ export class Vehicle {
   pilot: Person;
 
   @Field(() => Film)
-  @ManyToOne(() => Film)
+  @ManyToOne(() => Film, (film) => film.vehicles)
   film: Film;
 }
