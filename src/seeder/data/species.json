@@ -6,21 +6,6 @@
       "classification": "Mammal",
       "eye_colors": "Black, Blue, Brown, Grey, Green, Hazel",
       "hair_colors": "Black, Blonde, Brown, Grey, White",
-      "people": [
-        "ba924631-068e-4436-b6de-f3283fa848f0",
-        "e9356bb5-4d4a-4c93-aadc-c83e514bffe3",
-        "34277bec-7401-43fa-a00a-5aee64b45b08",
-        "91939012-90b9-46e5-a649-96b898073c82",
-        "20e3bd33-b35d-41e6-83a4-57ca7f028d38",
-        "8bccdc78-545b-49f4-a4c8-756163a38c91",
-        "116bfe1b-3ba8-4fa0-8f72-88537a493cb9",
-        "986faac6-67e3-4fb8-a9ee-bad077c2e7fe",
-        "d5df3c04-f355-4038-833c-83bd3502b6b9",
-        "3031caa8-eb1a-41c6-ab93-dd091b541e11",
-        "87b68b97-3774-495b-bf80-495a5f3e672d",
-        "08ffbce4-7f94-476a-95bc-76d3c3969c19",
-        "0f8ef701-b4c7-4f15-bd15-368c7fe38d0a"
-      ],
       "films": [
         "2baf70d1-42bb-4437-b551-e5fed5a87abe",
         "12cfb892-aac0-4c5b-94af-521852e46d6a",
@@ -50,10 +35,6 @@
       "classification": "Elk",
       "eye_colors": "Black, Red",
       "hair_colors": "Brown, Light Orange",
-      "people": [
-        "030555b3-4c92-4fce-93fb-e70c3ae3df8b",
-        "ca568e87-4ce2-4afa-a6c5-51f4ae80a60b"
-      ],
       "films": ["0440483e-ca0e-4120-8c50-4c8cd9b965d6"]
     },
     {
@@ -62,7 +43,6 @@
       "classification": "Spirit",
       "eye_colors": "Red",
       "hair_colors": "Light Orange",
-      "people": ["ca568e87-4ce2-4afa-a6c5-51f4ae80a60b"],
       "films": ["0440483e-ca0e-4120-8c50-4c8cd9b965d6"]
     },
     {
@@ -71,7 +51,6 @@
       "classification": "God",
       "eye_colors": "Brown",
       "hair_colors": "White",
-      "people": ["e9356bb5-4d4a-4c93-aadc-c83e514bffe3"],
       "films": ["0440483e-ca0e-4120-8c50-4c8cd9b965d6"]
     },
     {
@@ -80,17 +59,6 @@
       "classification": "Mammal",
       "eye_colors": "Brown, Black, Yellow, White, Emerald, Blue, Green",
       "hair_colors": "White, Black, Brown, Beige, Grey, Yellow",
-      "people": [
-        "7151abc6-1a9e-4e6a-9711-ddb50ea572ec",
-        "f467e18e-3694-409f-bdb3-be891ade1106",
-        "89026b3a-abc4-4053-ab1a-c6d2eea68faa",
-        "6b3facea-ea33-47b1-96ce-3fc737b119b8",
-        "3042818d-a8bb-4cba-8180-c19249822d57",
-        "58d1973f-f247-47d7-9358-e56cb0d2b5a6",
-        "a3d8e70f-46a0-4e5a-b850-db01620d6b92",
-        "fc196c4f-0201-4ed2-9add-c6403f7c4d32",
-        "466bc926-2024-4653-ac63-fe52f2dc8c7b"
-      ],
       "films": [
         "58611129-2dbc-4a81-a72f-77ddfc1b1b49",
         "ea660b10-85c4-4ae3-8a5f-41cea3648e3e",
@@ -105,11 +73,6 @@
       "classification": "Mammal",
       "eye_colors": "Grey",
       "hair_colors": "Grey",
-      "people": [
-        "d39deecb-2bd0-4770-8b45-485f26e1381f",
-        "591524bc-04fe-4e60-8d61-2425e42ffb2a",
-        "c491755a-407d-4d6e-b58a-240ec78b5061"
-      ],
       "films": ["58611129-2dbc-4a81-a72f-77ddfc1b1b49"]
     }
   ]

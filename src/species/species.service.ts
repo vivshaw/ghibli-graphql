@@ -11,10 +11,16 @@ export class SpeciesService {
   ) {}
 
   async all(): Promise<Species[]> {
-    return this.speciesRepository.find();
+    return this.speciesRepository.find({ relations: ['films', 'people'] });
   }
 
   async find(id: string): Promise<Species> {
-    return this.speciesRepository.findOne(id);
+    return this.speciesRepository.findOne(id, {
+      relations: ['films', 'people'],
+    });
+  }
+
+  async save(species: Species): Promise<Species> {
+    return this.speciesRepository.save(species);
   }
 }

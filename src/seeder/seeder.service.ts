@@ -8,6 +8,9 @@ import { Film } from 'src/films/film.model';
 import { FilmsService } from 'src/films/films.service';
 import { Person } from 'src/people/person.model';
 import { PeopleService } from 'src/people/people.service';
+import { SPECIES } from './data/species.json';
+import { Species } from 'src/species/species.model';
+import { SpeciesService } from 'src/species/species.service';
 
 @Injectable()
 export class SeederService {
@@ -15,6 +18,7 @@ export class SeederService {
     private readonly vehiclesService: VehiclesService,
     private readonly filmsService: FilmsService,
     private readonly peopleService: PeopleService,
+    private readonly speciesService: SpeciesService,
   ) {}
 
   private async seedFilms() {
@@ -50,6 +54,7 @@ export class SeederService {
       eye_color,
       hair_color,
       films,
+      species,
     } of PEOPLE) {
       const seedPerson = new Person();
 
@@ -59,6 +64,7 @@ export class SeederService {
       seedPerson.gender = gender;
       seedPerson.eye_color = eye_color;
       seedPerson.hair_color = hair_color;
+      seedPerson.species = await this.speciesService.find(species);
 
       const seedFilms = films
         ? await Promise.all(films.map((film) => this.filmsService.find(film)))
@@ -69,6 +75,35 @@ export class SeederService {
       }
 
       await this.peopleService.save(seedPerson);
+    }
+  }
+
+  private async seedSpecies() {
+    for (const {
+      id,
+      name,
+      classification,
+      eye_colors,
+      hair_colors,
+      films,
+    } of SPECIES) {
+      const seedSpecie = new Species();
+
+      seedSpecie.id = id;
+      seedSpecie.name = name;
+      seedSpecie.classification = classification;
+      seedSpecie.eye_colors = hair_colors;
+      seedSpecie.hair_colors = eye_colors;
+
+      const seedFilms = films
+        ? await Promise.all(films.map((film) => this.filmsService.find(film)))
+        : null;
+
+      if (seedFilms) {
+        seedSpecie.films = seedFilms;
+      }
+
+      await this.speciesService.save(seedSpecie);
     }
   }
 
@@ -101,6 +136,9 @@ export class SeederService {
 
     console.log('Seeding films...');
     await this.seedFilms();
+
+    console.log('Seeding species...');
+    await this.seedSpecies();
 
     console.log('Seeding people...');
     await this.seedPeople();

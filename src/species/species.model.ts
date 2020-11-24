@@ -25,15 +25,15 @@ export class Species {
   classification: string;
 
   @Field()
-  @Column('varchar', { length: 30, nullable: false })
+  @Column('varchar', { length: 60, nullable: false })
   eye_colors: string;
 
   @Field()
-  @Column('varchar', { length: 30, nullable: false })
+  @Column('varchar', { length: 60, nullable: false })
   hair_colors: string;
 
   @Field(() => [Film], { nullable: false })
-  @ManyToMany(() => Film)
+  @ManyToMany(() => Film, (film) => film.species)
   films: Film[];
 
   @Field(() => [Person], { nullable: false })

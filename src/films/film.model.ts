@@ -54,8 +54,8 @@ export class Film {
   people: Person[];
 
   @Field(() => [Species], { nullable: false })
-  @ManyToMany(() => Species, (species) => species.people)
-  @JoinColumn()
+  @ManyToMany(() => Species, (species) => species.films)
+  @JoinTable()
   species: Species[];
 
   @Field(() => [Location], { nullable: false })
