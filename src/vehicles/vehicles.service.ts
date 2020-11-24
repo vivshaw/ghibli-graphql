@@ -17,4 +17,8 @@ export class VehiclesService {
   async find(id: string): Promise<Vehicle> {
     return this.vehicleRepository.findOne(id);
   }
+
+  async save(vehicle: Vehicle): Promise<Vehicle> {
+    return this.vehicleRepository.save(vehicle);
+  }
 }

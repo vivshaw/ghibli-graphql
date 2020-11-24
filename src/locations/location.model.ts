@@ -4,7 +4,6 @@ import { Person } from 'src/people/person.model';
 import {
   Column,
   Entity,
-  JoinColumn,
   JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,

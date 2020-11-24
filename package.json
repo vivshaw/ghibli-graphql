@@ -18,7 +18,12 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "db:seed": "node dist/seed",
+    "db:drop": "typeorm schema:drop",
+    "db:migrate": "typeorm migration:run",
+    "db:clear": "npm run db:drop && npm run db:migrate",
+    "db:reset": "npm run db:clear && npm run db:seed"
   },
   "dependencies": {
     "@nestjs/common": "^7.5.1",

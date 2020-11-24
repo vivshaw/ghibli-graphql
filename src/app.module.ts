@@ -7,7 +7,7 @@ import { SpeciesModule } from './species/species.module';
 import { LocationsModule } from './locations/locations.module';
 import { PeopleModule } from './people/people.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DefaultAdminModule } from 'nestjs-admin';
+import { SeederModule } from './seeder/seeder.module';
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import { DefaultAdminModule } from 'nestjs-admin';
     PeopleModule,
     SpeciesModule,
     VehiclesModule,
-    DefaultAdminModule,
+    SeederModule,
   ],
 })
 export class AppModule {}
