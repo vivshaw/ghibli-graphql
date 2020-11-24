@@ -26,7 +26,7 @@ type Person {
   id: String!
   name: String!
   gender: String!
-  age: Float!
+  age: String!
   eye_color: String!
   hair_color: String!
   films: [Film!]!

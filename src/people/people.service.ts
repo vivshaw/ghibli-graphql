@@ -11,10 +11,16 @@ export class PeopleService {
   ) {}
 
   async all(): Promise<Person[]> {
-    return this.personRepository.find();
+    return this.personRepository.find({ relations: ['films', 'pilotOf'] });
   }
 
   async find(id: string): Promise<Person> {
-    return this.personRepository.findOne(id);
+    return this.personRepository.findOne(id, {
+      relations: ['films', 'pilotOf'],
+    });
+  }
+
+  async save(person: Person): Promise<Person> {
+    return this.personRepository.save(person);
   }
 }

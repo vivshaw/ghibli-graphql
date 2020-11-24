@@ -34,8 +34,7 @@ export class Vehicle {
   length: number;
 
   @Field(() => Person)
-  @OneToOne(() => Person)
-  @JoinColumn()
+  @ManyToOne(() => Person, (person) => person.pilotOf)
   pilot: Person;
 
   @Field(() => Film)

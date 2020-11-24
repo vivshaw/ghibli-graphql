@@ -3,14 +3,18 @@ import { Vehicle } from 'src/vehicles/vehicle.model';
 import { VehiclesService } from 'src/vehicles/vehicles.service';
 import { VEHICLES } from './data/vehicles.json';
 import { FILMS } from './data/films.json';
+import { PEOPLE } from './data/people.json';
 import { Film } from 'src/films/film.model';
 import { FilmsService } from 'src/films/films.service';
+import { Person } from 'src/people/person.model';
+import { PeopleService } from 'src/people/people.service';
 
 @Injectable()
 export class SeederService {
   constructor(
     private readonly vehiclesService: VehiclesService,
     private readonly filmsService: FilmsService,
+    private readonly peopleService: PeopleService,
   ) {}
 
   private async seedFilms() {
@@ -22,7 +26,6 @@ export class SeederService {
       producer,
       release_date,
       rt_score,
-      vehicles,
     } of FILMS) {
       const seedFilm = new Film();
 
@@ -38,6 +41,37 @@ export class SeederService {
     }
   }
 
+  private async seedPeople() {
+    for (const {
+      id,
+      name,
+      age,
+      gender,
+      eye_color,
+      hair_color,
+      films,
+    } of PEOPLE) {
+      const seedPerson = new Person();
+
+      seedPerson.id = id;
+      seedPerson.name = name;
+      seedPerson.age = age;
+      seedPerson.gender = gender;
+      seedPerson.eye_color = eye_color;
+      seedPerson.hair_color = hair_color;
+
+      const seedFilms = films
+        ? await Promise.all(films.map((film) => this.filmsService.find(film)))
+        : null;
+
+      if (seedFilms) {
+        seedPerson.films = seedFilms;
+      }
+
+      await this.peopleService.save(seedPerson);
+    }
+  }
+
   private async seedVehicles() {
     for (const {
       id,
@@ -46,6 +80,7 @@ export class SeederService {
       vehicle_class,
       length,
       film,
+      pilot,
     } of VEHICLES) {
       const seedVehicle = new Vehicle();
 
@@ -55,6 +90,7 @@ export class SeederService {
       seedVehicle.vehicle_class = vehicle_class;
       seedVehicle.length = length;
       seedVehicle.film = await this.filmsService.find(film);
+      seedVehicle.pilot = await this.peopleService.find(pilot);
 
       await this.vehiclesService.save(seedVehicle);
     }
@@ -62,10 +98,16 @@ export class SeederService {
 
   async seed() {
     console.log('Beginning seed.');
+
     console.log('Seeding films...');
     await this.seedFilms();
+
+    console.log('Seeding people...');
+    await this.seedPeople();
+
     console.log('Seeding vehicles...');
     await this.seedVehicles();
+
     console.log('Done seeding!');
   }
 }

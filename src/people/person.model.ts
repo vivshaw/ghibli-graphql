@@ -28,8 +28,8 @@ export class Person {
   gender: string;
 
   @Field()
-  @Column('int', { nullable: false })
-  age: number;
+  @Column('varchar', { length: 30, nullable: false })
+  age: string;
 
   @Field()
   @Column('varchar', { length: 30, nullable: false })

@@ -11,11 +11,11 @@ export class VehiclesService {
   ) {}
 
   async all(): Promise<Vehicle[]> {
-    return this.vehicleRepository.find({ relations: ['film'] });
+    return this.vehicleRepository.find({ relations: ['film', 'pilot'] });
   }
 
   async find(id: string): Promise<Vehicle> {
-    return this.vehicleRepository.findOne(id, { relations: ['film'] });
+    return this.vehicleRepository.findOne(id, { relations: ['film', 'pilot'] });
   }
 
   async save(vehicle: Vehicle): Promise<Vehicle> {
