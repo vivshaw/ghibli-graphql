@@ -12,13 +12,13 @@ export class FilmsService {
 
   async all(): Promise<Film[]> {
     return this.filmRepository.find({
-      relations: ['vehicles', 'people', 'species'],
+      relations: ['vehicles', 'people', 'species', 'locations'],
     });
   }
 
   async find(id: string): Promise<Film> {
     return this.filmRepository.findOne(id, {
-      relations: ['vehicles', 'people', 'species'],
+      relations: ['vehicles', 'people', 'species', 'locations'],
     });
   }
 

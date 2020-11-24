@@ -12,13 +12,13 @@ export class PeopleService {
 
   async all(): Promise<Person[]> {
     return this.personRepository.find({
-      relations: ['films', 'pilotOf', 'species'],
+      relations: ['films', 'pilotOf', 'species', 'locations'],
     });
   }
 
   async find(id: string): Promise<Person> {
     return this.personRepository.findOne(id, {
-      relations: ['films', 'pilotOf', 'species'],
+      relations: ['films', 'pilotOf', 'species', 'locations'],
     });
   }
 

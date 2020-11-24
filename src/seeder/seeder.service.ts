@@ -11,6 +11,9 @@ import { PeopleService } from 'src/people/people.service';
 import { SPECIES } from './data/species.json';
 import { Species } from 'src/species/species.model';
 import { SpeciesService } from 'src/species/species.service';
+import { LOCATIONS } from './data/locations.json';
+import { Location } from 'src/locations/location.model';
+import { LocationsService } from 'src/locations/locations.service';
 
 @Injectable()
 export class SeederService {
@@ -19,6 +22,7 @@ export class SeederService {
     private readonly filmsService: FilmsService,
     private readonly peopleService: PeopleService,
     private readonly speciesService: SpeciesService,
+    private readonly locationsService: LocationsService,
   ) {}
 
   private async seedFilms() {
@@ -42,6 +46,46 @@ export class SeederService {
       seedFilm.rt_score = rt_score;
 
       await this.filmsService.save(seedFilm);
+    }
+  }
+
+  private async seedLocations() {
+    for (const {
+      id,
+      name,
+      climate,
+      terrain,
+      surface_water,
+      films,
+      residents,
+    } of LOCATIONS) {
+      const seedLocation = new Location();
+
+      seedLocation.id = id;
+      seedLocation.name = name;
+      seedLocation.terrain = terrain;
+      seedLocation.climate = climate;
+      seedLocation.surface_water = surface_water;
+
+      const seedFilms = films
+        ? await Promise.all(films.map((film) => this.filmsService.find(film)))
+        : null;
+
+      if (seedFilms) {
+        seedLocation.films = seedFilms;
+      }
+
+      const seedResidents = residents
+        ? await Promise.all(
+            residents.map((resident) => this.peopleService.find(resident)),
+          )
+        : null;
+
+      if (seedResidents) {
+        seedLocation.residents = seedResidents;
+      }
+
+      await this.locationsService.save(seedLocation);
     }
   }
 
@@ -142,6 +186,9 @@ export class SeederService {
 
     console.log('Seeding people...');
     await this.seedPeople();
+
+    console.log('Seeding locations...');
+    await this.seedLocations();
 
     console.log('Seeding vehicles...');
     await this.seedVehicles();

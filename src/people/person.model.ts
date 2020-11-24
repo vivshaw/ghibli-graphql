@@ -48,7 +48,7 @@ export class Person {
   species: Species;
 
   @Field(() => [Location], { nullable: true })
-  @ManyToMany(() => Location)
+  @ManyToMany(() => Location, (location) => location.residents)
   locations: Location[];
 
   @Field(() => [Vehicle], { nullable: true })

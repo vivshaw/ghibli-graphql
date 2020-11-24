@@ -33,11 +33,11 @@ export class Location {
   surface_water: number;
 
   @Field(() => [Person], { nullable: false })
-  @ManyToMany(() => Person)
+  @ManyToMany(() => Person, (person) => person.locations)
   @JoinTable()
   residents: Person[];
 
   @Field(() => [Film], { nullable: false })
-  @ManyToMany(() => Film)
+  @ManyToMany(() => Film, (film) => film.locations)
   films: Film[];
 }

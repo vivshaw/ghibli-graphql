@@ -11,10 +11,18 @@ export class LocationsService {
   ) {}
 
   async all(): Promise<Location[]> {
-    return this.locationRepository.find();
+    return this.locationRepository.find({
+      relations: ['residents', 'films'],
+    });
   }
 
   async find(id: string): Promise<Location> {
-    return this.locationRepository.findOne(id);
+    return this.locationRepository.findOne(id, {
+      relations: ['residents', 'films'],
+    });
+  }
+
+  async save(location: Location): Promise<Location> {
+    return this.locationRepository.save(location);
   }
 }

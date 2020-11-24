@@ -61,5 +61,5 @@ export class Film {
   @Field(() => [Location], { nullable: false })
   @ManyToMany(() => Location, (location) => location.films)
   @JoinTable()
-  location: Location[];
+  locations: Location[];
 }

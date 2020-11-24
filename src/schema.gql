@@ -56,7 +56,7 @@ type Film {
   vehicles: [Vehicle!]
   people: [Person!]!
   species: [Species!]!
-  location: [Location!]!
+  locations: [Location!]!
 }
 
 type Query {
