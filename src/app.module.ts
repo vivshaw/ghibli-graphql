@@ -15,6 +15,7 @@ import { SeederModule } from './seeder/seeder.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       playground: true,
       introspection: true,
+      path: '/',
     }),
     TypeOrmModule.forRoot(),
     FilmsModule,
