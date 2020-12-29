@@ -13,9 +13,10 @@ import { SeederModule } from './seeder/seeder.module';
   imports: [
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      playground: true,
       introspection: true,
       path: '/',
+      playground: true,
+      sortSchema: true,
     }),
     TypeOrmModule.forRoot(),
     FilmsModule,
