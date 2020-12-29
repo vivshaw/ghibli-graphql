@@ -9,6 +9,7 @@ import { PeopleModule } from './people/people.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SeederModule } from './seeder/seeder.module';
 import * as depthLimit from 'graphql-depth-limit';
+import MaxComplexityPlugin from './middleware/MaxComplexityPlugin';
 
 @Module({
   imports: [
@@ -28,5 +29,6 @@ import * as depthLimit from 'graphql-depth-limit';
     VehiclesModule,
     SeederModule,
   ],
+  providers: [MaxComplexityPlugin],
 })
 export class AppModule {}
