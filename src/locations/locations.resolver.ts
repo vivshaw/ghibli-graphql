@@ -8,12 +8,12 @@ export class LocationsResolver {
   constructor(private locationsService: LocationsService) {}
 
   @Query(() => [Location])
-  locations() {
+  async locations() {
     return this.locationsService.all();
   }
 
   @Query(() => Location)
-  location(@Args('id') id: string) {
+  async location(@Args('id') id: string) {
     return this.locationsService.find(id);
   }
 

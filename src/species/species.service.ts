@@ -25,22 +25,22 @@ export class SpeciesService {
   }
 
   async membersOfSpecies(species: Species): Promise<Person[]> {
-    const queryLocation = await this.speciesRepository
+    const query = await this.speciesRepository
       .createQueryBuilder('species')
       .where('species.id = :id', { id: species.id })
       .leftJoinAndSelect('species.people', 'people')
       .getOne();
 
-    return queryLocation.people;
+    return query.people;
   }
 
   async filmsForSpecies(species: Species): Promise<Film[]> {
-    const queryLocation = await this.speciesRepository
+    const query = await this.speciesRepository
       .createQueryBuilder('species')
       .where('species.id = :id', { id: species.id })
       .leftJoinAndSelect('species.films', 'films')
       .getOne();
 
-    return queryLocation.films;
+    return query.films;
   }
 }

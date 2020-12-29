@@ -9,12 +9,12 @@ export class SpeciesResolver {
   constructor(private speciesService: SpeciesService) {}
 
   @Query(() => [Species])
-  species() {
+  async allSpecies() {
     return this.speciesService.all();
   }
 
   @Query(() => Species)
-  specie(@Args('id') id: string) {
+  async species(@Args('id') id: string) {
     return this.speciesService.find(id);
   }
 

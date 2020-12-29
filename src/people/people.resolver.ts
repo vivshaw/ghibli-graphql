@@ -9,12 +9,12 @@ export class PeopleResolver {
   constructor(private peopleService: PeopleService) {}
 
   @Query(() => [Person])
-  people() {
+  async people() {
     return this.peopleService.all();
   }
 
   @Query(() => Person)
-  person(@Args('id') id: string) {
+  async person(@Args('id') id: string) {
     return this.peopleService.find(id);
   }
 

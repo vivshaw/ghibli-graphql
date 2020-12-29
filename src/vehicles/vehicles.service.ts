@@ -25,22 +25,22 @@ export class VehiclesService {
   }
 
   async filmForVehicle(vehicle: Vehicle): Promise<Film> {
-    const queryVehicle = await this.vehicleRepository
+    const query = await this.vehicleRepository
       .createQueryBuilder('vehicle')
       .where('vehicle.id = :id', { id: vehicle.id })
       .leftJoinAndSelect('vehicle.film', 'film')
       .getOne();
 
-    return queryVehicle.film;
+    return query.film;
   }
 
   async pilotOfVehicle(vehicle: Vehicle): Promise<Person> {
-    const queryVehicle = await this.vehicleRepository
+    const query = await this.vehicleRepository
       .createQueryBuilder('vehicle')
       .where('vehicle.id = :id', { id: vehicle.id })
       .leftJoinAndSelect('vehicle.pilot', 'people')
       .getOne();
 
-    return queryVehicle.pilot;
+    return query.pilot;
   }
 }

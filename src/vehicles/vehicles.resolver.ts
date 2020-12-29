@@ -9,12 +9,12 @@ export class VehiclesResolver {
   constructor(private vehiclesService: VehiclesService) {}
 
   @Query(() => [Vehicle])
-  vehicles() {
+  async vehicles() {
     return this.vehiclesService.all();
   }
 
   @Query(() => Vehicle)
-  vehicle(@Args('id') id: string) {
+  async vehicle(@Args('id') id: string) {
     return this.vehiclesService.find(id);
   }
 

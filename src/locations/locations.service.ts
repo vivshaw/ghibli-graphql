@@ -25,22 +25,22 @@ export class LocationsService {
   }
 
   async filmsForLocation(location: Location): Promise<Film[]> {
-    const queryLocation = await this.locationRepository
+    const query = await this.locationRepository
       .createQueryBuilder('location')
       .where('location.id = :id', { id: location.id })
       .leftJoinAndSelect('location.films', 'films')
       .getOne();
 
-    return queryLocation.films;
+    return query.films;
   }
 
   async residentsOfLocation(location: Location): Promise<Person[]> {
-    const queryLocation = await this.locationRepository
+    const query = await this.locationRepository
       .createQueryBuilder('location')
       .where('location.id = :id', { id: location.id })
       .leftJoinAndSelect('location.residents', 'people')
       .getOne();
 
-    return queryLocation.residents;
+    return query.residents;
   }
 }
