@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as DataLoader from 'dataloader';
 import { Film } from 'src/films/film.model';
 import { Person } from 'src/people/person.model';
 import { Repository } from 'typeorm';
@@ -10,7 +11,15 @@ export class LocationsService {
   constructor(
     @InjectRepository(Location)
     private locationRepository: Repository<Location>,
-  ) {}
+  ) {
+    this.filmLoader = new DataLoader<string, Film[]>(this.filmsOfLocations);
+    this.peopleLoader = new DataLoader<string, Person[]>(
+      this.residentsOfLocations,
+    );
+  }
+
+  filmLoader: DataLoader<string, Film[]>;
+  peopleLoader: DataLoader<string, Person[]>;
 
   async all(): Promise<Location[]> {
     return this.locationRepository.find();
@@ -24,23 +33,31 @@ export class LocationsService {
     return this.locationRepository.save(location);
   }
 
-  async filmsForLocation(location: Location): Promise<Film[]> {
-    const query = await this.locationRepository
+  filmsOfLocations = async (ids: string[]) => {
+    const locations = await this.locationRepository
       .createQueryBuilder('location')
-      .where('location.id = :id', { id: location.id })
       .leftJoinAndSelect('location.films', 'films')
-      .getOne();
+      .where('location.id IN (:...ids)', { ids })
+      .getMany();
 
-    return query.films;
+    return locations.map((location) => location.films);
+  };
+
+  async loadFilmsForLocation(location: Location) {
+    return this.filmLoader.load(location.id);
   }
 
-  async residentsOfLocation(location: Location): Promise<Person[]> {
-    const query = await this.locationRepository
+  residentsOfLocations = async (ids: string[]) => {
+    const locations = await this.locationRepository
       .createQueryBuilder('location')
-      .where('location.id = :id', { id: location.id })
       .leftJoinAndSelect('location.residents', 'people')
-      .getOne();
+      .where('location.id IN (:...ids)', { ids })
+      .getMany();
 
-    return query.residents;
+    return locations.map((location) => location.residents);
+  };
+
+  async loadResidentsForLocation(location: Location) {
+    return this.peopleLoader.load(location.id);
   }
 }

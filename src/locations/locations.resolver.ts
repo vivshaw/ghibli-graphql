@@ -19,11 +19,11 @@ export class LocationsResolver {
 
   @ResolveField((returns) => [Film])
   async films(@Parent() location: Location) {
-    return this.locationsService.filmsForLocation(location);
+    return this.locationsService.loadFilmsForLocation(location);
   }
 
   @ResolveField((returns) => [Film])
   async residents(@Parent() location: Location) {
-    return this.locationsService.residentsOfLocation(location);
+    return this.locationsService.loadResidentsForLocation(location);
   }
 }
