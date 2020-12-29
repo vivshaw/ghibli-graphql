@@ -1,75 +1,93 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+  <a href="https://ghibli-graphql.herokuapp.com/" target="blank"><img src="ghibli-graphql.png" width="360" alt="Ghibli Graphql API" /></a>
 </p>
+<p align="center">An unofficial <a href="https://graphql.org/" target="_blank">GraphQL</a> API for information about the worlds of <a href="https://www.ghibli.jp/" target=_blank">Studio Ghibli</a> films.</p>
 
-[travis-image]: https://api.travis-ci.org/nestjs/nest.svg?branch=master
-[travis-url]: https://travis-ci.org/nestjs/nest
-[linux-image]: https://img.shields.io/travis/nestjs/nest/master.svg?label=linux
-[linux-url]: https://travis-ci.org/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, heavily inspired by <a href="https://angular.io" target="blank">Angular</a>.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/dm/@nestjs/core.svg" alt="NPM Downloads" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://api.travis-ci.org/nestjs/nest.svg?branch=master" alt="Travis" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://img.shields.io/travis/nestjs/nest/master.svg?label=linux" alt="Linux" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#5" alt="Coverage" /></a>
-<a href="https://gitter.im/nestjs/nestjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge"><img src="https://badges.gitter.im/nestjs/nestjs.svg" alt="Gitter" /></a>
-<a href="https://opencollective.com/nest#backer"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a>
-  <a href="https://twitter.com/nestframework"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Ghibli GraphQL API ✨
 
-## Description
+The [Ghibli GraphQL API](https://ghibli-graphql.herokuapp.com/) provides information about the world of Studio Ghibli via [GraphQL](https://graphql.org/). Information about the films, characters, lands, vehicles, and species from this beloved studio are now available via GraphQL. It was also created with a secondary purpose, to provide an example project of a public GraphQL API. There are lots of public REST APIs, but far fewer for GraphQL, so I figured there was some value in expanding the field!
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This, of course, is heavily inspired by [janaipakos](https://jamesanaipakos.com/)'s [Ghibli API](https://github.com/janaipakos/ghibliapi), and uses the core JSON data from said API.
 
-## Installation
+## GraphQL Types
 
-```bash
-$ npm install
+- Films
+- Locations
+- People
+- Species
+- Vehicles
+
+See [the GraphQL Playground](https://ghibli-graphql.herokuapp.com/) or [the schema](https://github.com/vivshaw/ghibli-graphql/blob/main/src/schema.gql) for documentation about the fields of each types.
+
+## Getting Started
+
+The simplest way to get started is via [the GraphQL Playground](https://ghibli-graphql.herokuapp.com/), in which you can create your queries with handy IntelliSense, typechecking, and prettifying; as well as viewing the schema and documentation in the sidebar.
+
+If that's not your jam, any API tool like Postman or Insomnia will do the trick. If you prefer CLI tools, `curl` is fine too. For example:
+
+```
+curl \
+-X POST \
+-H "Content-Type: application/json" \
+--data '{ "query": "{ vehicles { description id length name } }" }' \
+https://ghibli-graphql.herokuapp.com/
 ```
 
-## Running the app
+When you run this request, the API will respond with the following JSON:
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```json
+{
+  "data":{
+    "vehicles":[
+      {
+        "description":"A military airship utilized by the government to access Laputa",
+        "id":"4e09b023-f650-4747-9ab9-eacf14540cfb",
+        "length":1000,
+        "name":"Air Destroyer Goliath"
+      },
+      ...
+    ]
+  }
+}
 ```
 
-## Test
+## API Limits
 
-```bash
-# unit tests
-$ npm run test
+To mitigate server load, this API uses several forms of limit:
 
-# e2e tests
-$ npm run test:e2e
+1. Query depth is limited at 7. Nested queries deeper than this will be rejected.
+2. Query complexity is limited at 150, with a value of 1 complexity per field.
+3. Throttling is set at a maximum of 3 requests per second for each client.
+4. Finally, if you do something sneaky and manage to overload it anyway, there's the default Heroku timeout.
 
-# test coverage
-$ npm run test:cov
-```
+These are very rudimentary at the moment and will need further tuning.
 
-## Support
+## Running it locally
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+A simple `git clone` and `npm install` will get you started! Then you'll want to do two things:
 
-## Stay in touch
+1. Provide POSTGRES_HOST, POSTGRES_USERNAME, POSTGRES_PASSWORD, and POSTGRES_DATABASE as environment variables. I recommend [dotenv](https://www.npmjs.com/package/dotenv).
+2. Set up the initial DB and seed it, with `npm run rb:reset`.
+3. Hoist local dev instance with `npm run start:dev`.
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+You're now live on `localhost:3000` (or environment variable PORT if defined).
 
-## License
+## Contributing
 
-  Nest is [MIT licensed](LICENSE).
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details!
+
+## Next Steps
+
+- [ ] CI/CD
+- [ ] Filters
+- [ ] Sorts
+- [ ] Search, perhaps
+- [ ] ...Dockerize or something?
+
+## Examples
+
+TypeScript client app coming Soon™ for glorious full-stack type safety.
+
+## Resources
+
+This GraphQL API was built in TypeScript using [NestJS](https://nestjs.com/) and [TypeORM](https://typeorm.io/) for maximum comfy. Under the hood, it's using [Express](https://expressjs.com/), [Apollo Server](https://github.com/apollographql/apollo-server), and [Postgres](https://www.postgresql.org/). Deployment is via [Heroku](https://heroku.com/).
