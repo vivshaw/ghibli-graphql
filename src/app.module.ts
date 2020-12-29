@@ -8,6 +8,7 @@ import { LocationsModule } from './locations/locations.module';
 import { PeopleModule } from './people/people.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SeederModule } from './seeder/seeder.module';
+import * as depthLimit from 'graphql-depth-limit';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { SeederModule } from './seeder/seeder.module';
       path: '/',
       playground: true,
       sortSchema: true,
+      validationRules: [depthLimit(7)],
     }),
     TypeOrmModule.forRoot(),
     FilmsModule,
