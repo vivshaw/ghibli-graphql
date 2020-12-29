@@ -8,13 +8,15 @@ import { LocationsModule } from './locations/locations.module';
 import { PeopleModule } from './people/people.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SeederModule } from './seeder/seeder.module';
+import { GuardModule } from './guards/guard.module';
 import * as depthLimit from 'graphql-depth-limit';
-import MaxComplexityPlugin from './middleware/MaxComplexityPlugin';
+import MaxComplexityPlugin from './plugins/MaxComplexityPlugin';
 
 @Module({
   imports: [
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      context: ({ req, res }) => ({ req, res }),
       introspection: true,
       path: '/',
       playground: true,
@@ -28,6 +30,7 @@ import MaxComplexityPlugin from './middleware/MaxComplexityPlugin';
     SpeciesModule,
     VehiclesModule,
     SeederModule,
+    GuardModule,
   ],
   providers: [MaxComplexityPlugin],
 })

@@ -39,6 +39,7 @@
     "graphql-depth-limit": "^1.1.0",
     "graphql-query-complexity": "^0.7.2",
     "graphql-tools": "^7.0.1",
+    "nestjs-throttler": "^0.3.0",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
