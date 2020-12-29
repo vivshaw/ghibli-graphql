@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Film } from 'src/films/film.model';
+import { Person } from 'src/people/person.model';
 import { Repository } from 'typeorm';
 import { Species } from './species.model';
 
@@ -11,16 +13,34 @@ export class SpeciesService {
   ) {}
 
   async all(): Promise<Species[]> {
-    return this.speciesRepository.find({ relations: ['films', 'people'] });
+    return this.speciesRepository.find();
   }
 
   async find(id: string): Promise<Species> {
-    return this.speciesRepository.findOne(id, {
-      relations: ['films', 'people'],
-    });
+    return this.speciesRepository.findOne(id);
   }
 
   async save(species: Species): Promise<Species> {
     return this.speciesRepository.save(species);
+  }
+
+  async membersOfSpecies(species: Species): Promise<Person[]> {
+    const queryLocation = await this.speciesRepository
+      .createQueryBuilder('species')
+      .where('species.id = :id', { id: species.id })
+      .leftJoinAndSelect('species.people', 'people')
+      .getOne();
+
+    return queryLocation.people;
+  }
+
+  async filmsForSpecies(species: Species): Promise<Film[]> {
+    const queryLocation = await this.speciesRepository
+      .createQueryBuilder('species')
+      .where('species.id = :id', { id: species.id })
+      .leftJoinAndSelect('species.films', 'films')
+      .getOne();
+
+    return queryLocation.films;
   }
 }
