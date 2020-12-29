@@ -1,8 +1,10 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
+import { Film } from 'src/films/film.model';
+import { Species } from 'src/species/species.model';
 import { PeopleService } from './people.service';
 import { Person } from './person.model';
 
-@Resolver('Person')
+@Resolver((of) => Person)
 export class PeopleResolver {
   constructor(private peopleService: PeopleService) {}
 
@@ -14,5 +16,25 @@ export class PeopleResolver {
   @Query(() => Person)
   person(@Args('id') id: string) {
     return this.peopleService.find(id);
+  }
+
+  @ResolveField((returns) => [Film])
+  async films(@Parent() person: Person) {
+    return this.peopleService.filmsForPerson(person);
+  }
+
+  @ResolveField((returns) => Species)
+  async species(@Parent() person: Person) {
+    return this.peopleService.speciesOfPerson(person);
+  }
+
+  @ResolveField((returns) => Species)
+  async locations(@Parent() person: Person) {
+    return this.peopleService.locationsOfPerson(person);
+  }
+
+  @ResolveField((returns) => Species)
+  async pilotOf(@Parent() person: Person) {
+    return this.peopleService.vehiclesOfPerson(person);
   }
 }
