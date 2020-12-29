@@ -22,21 +22,21 @@ export class FilmsResolver {
 
   @ResolveField((returns) => [Location])
   async locations(@Parent() film: Film) {
-    return this.filmsService.locationsInFilm(film);
+    return this.filmsService.loadLocationsForFilm(film);
   }
 
   @ResolveField((returns) => [Person])
   async people(@Parent() film: Film) {
-    return this.filmsService.peopleInFilm(film);
+    return this.filmsService.loadPeopleForFilm(film);
   }
 
   @ResolveField((returns) => [Species])
   async species(@Parent() film: Film) {
-    return this.filmsService.speciesInFilm(film);
+    return this.filmsService.loadSpeciesForFilm(film);
   }
 
   @ResolveField((returns) => [Vehicle])
   async vehicles(@Parent() film: Film) {
-    return this.filmsService.vehiclesInFilm(film);
+    return this.filmsService.loadVehiclesForFilm(film);
   }
 }

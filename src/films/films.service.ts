@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as DataLoader from 'dataloader';
 import { Location } from 'src/locations/location.model';
 import { Person } from 'src/people/person.model';
 import { Species } from 'src/species/species.model';
@@ -12,7 +13,21 @@ export class FilmsService {
   constructor(
     @InjectRepository(Film)
     private filmRepository: Repository<Film>,
-  ) {}
+  ) {
+    this.locationLoader = new DataLoader<string, Location[]>(
+      this.locationsOfFilms,
+    );
+    this.peopleLoader = new DataLoader<string, Person[]>(this.peopleOfFilms);
+    this.speciesLoader = new DataLoader<string, Species[]>(this.speciesOfFilms);
+    this.vehicleLoader = new DataLoader<string, Vehicle[]>(
+      this.vehiclesOfFilms,
+    );
+  }
+
+  locationLoader: DataLoader<string, Location[]>;
+  peopleLoader: DataLoader<string, Person[]>;
+  speciesLoader: DataLoader<string, Species[]>;
+  vehicleLoader: DataLoader<string, Vehicle[]>;
 
   async all(): Promise<Film[]> {
     return this.filmRepository.find();
@@ -26,43 +41,59 @@ export class FilmsService {
     return this.filmRepository.save(film);
   }
 
-  async peopleInFilm(film: Film): Promise<Person[]> {
-    const query = await this.filmRepository
+  locationsOfFilms = async (ids: string[]) => {
+    const films = await this.filmRepository
       .createQueryBuilder('film')
-      .where('film.id = :id', { id: film.id })
-      .leftJoinAndSelect('film.people', 'people')
-      .getOne();
-
-    return query.people;
-  }
-
-  async vehiclesInFilm(film: Film): Promise<Vehicle[]> {
-    const query = await this.filmRepository
-      .createQueryBuilder('film')
-      .where('film.id = :id', { id: film.id })
-      .leftJoinAndSelect('film.vehicles', 'vehicles')
-      .getOne();
-
-    return query.vehicles;
-  }
-
-  async locationsInFilm(film: Film): Promise<Location[]> {
-    const query = await this.filmRepository
-      .createQueryBuilder('film')
-      .where('film.id = :id', { id: film.id })
       .leftJoinAndSelect('film.locations', 'locations')
-      .getOne();
+      .where('film.id IN (:...ids)', { ids })
+      .getMany();
 
-    return query.locations;
+    return films.map((film) => film.locations);
+  };
+
+  async loadLocationsForFilm(film: Film) {
+    return this.locationLoader.load(film.id);
   }
 
-  async speciesInFilm(film: Film): Promise<Species[]> {
-    const query = await this.filmRepository
+  peopleOfFilms = async (ids: string[]) => {
+    const films = await this.filmRepository
       .createQueryBuilder('film')
-      .where('film.id = :id', { id: film.id })
-      .leftJoinAndSelect('film.species', 'species')
-      .getOne();
+      .leftJoinAndSelect('film.people', 'people')
+      .where('film.id IN (:...ids)', { ids })
+      .getMany();
 
-    return query.species;
+    return films.map((film) => film.people);
+  };
+
+  async loadPeopleForFilm(film: Film) {
+    return this.peopleLoader.load(film.id);
+  }
+
+  speciesOfFilms = async (ids: string[]) => {
+    const films = await this.filmRepository
+      .createQueryBuilder('film')
+      .leftJoinAndSelect('film.species', 'species')
+      .where('film.id IN (:...ids)', { ids })
+      .getMany();
+
+    return films.map((film) => film.species);
+  };
+
+  async loadSpeciesForFilm(film: Film) {
+    return this.speciesLoader.load(film.id);
+  }
+
+  vehiclesOfFilms = async (ids: string[]) => {
+    const films = await this.filmRepository
+      .createQueryBuilder('film')
+      .leftJoinAndSelect('film.vehicles', 'vehicles')
+      .where('film.id IN (:...ids)', { ids })
+      .getMany();
+
+    return films.map((film) => film.vehicles);
+  };
+
+  async loadVehiclesForFilm(film: Film) {
+    return this.vehicleLoader.load(film.id);
   }
 }
