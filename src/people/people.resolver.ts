@@ -20,21 +20,21 @@ export class PeopleResolver {
 
   @ResolveField((returns) => [Film])
   async films(@Parent() person: Person) {
-    return this.peopleService.filmsForPerson(person);
+    return this.peopleService.loadFilmsForPerson(person);
   }
 
   @ResolveField((returns) => Species)
   async species(@Parent() person: Person) {
-    return this.peopleService.speciesOfPerson(person);
+    return this.peopleService.loadSpeciesForPerson(person);
   }
 
   @ResolveField((returns) => Species)
   async locations(@Parent() person: Person) {
-    return this.peopleService.locationsOfPerson(person);
+    return this.peopleService.loadLocationsForPerson(person);
   }
 
   @ResolveField((returns) => Species)
   async pilotOf(@Parent() person: Person) {
-    return this.peopleService.vehiclesOfPerson(person);
+    return this.peopleService.loadVehiclesForPeople(person);
   }
 }
