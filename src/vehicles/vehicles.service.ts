@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as DataLoader from 'dataloader';
 import { Film } from 'src/films/film.model';
 import { Person } from 'src/people/person.model';
 import { Repository } from 'typeorm';
@@ -10,7 +11,13 @@ export class VehiclesService {
   constructor(
     @InjectRepository(Vehicle)
     private vehicleRepository: Repository<Vehicle>,
-  ) {}
+  ) {
+    this.filmLoader = new DataLoader<string, Film>(this.filmOfVehicles);
+    this.peopleLoader = new DataLoader<string, Person>(this.pilotOfVehicles);
+  }
+
+  filmLoader: DataLoader<string, Film>;
+  peopleLoader: DataLoader<string, Person>;
 
   async all(): Promise<Vehicle[]> {
     return this.vehicleRepository.find();
@@ -24,23 +31,31 @@ export class VehiclesService {
     return this.vehicleRepository.save(vehicle);
   }
 
-  async filmForVehicle(vehicle: Vehicle): Promise<Film> {
-    const query = await this.vehicleRepository
+  filmOfVehicles = async (ids: string[]) => {
+    const vehicles = await this.vehicleRepository
       .createQueryBuilder('vehicle')
-      .where('vehicle.id = :id', { id: vehicle.id })
       .leftJoinAndSelect('vehicle.film', 'film')
-      .getOne();
+      .where('vehicle.id IN (:...ids)', { ids })
+      .getMany();
 
-    return query.film;
+    return vehicles.map((vehicle) => vehicle.film);
+  };
+
+  async loadFilmForVehicle(vehicle: Vehicle) {
+    return this.filmLoader.load(vehicle.id);
   }
 
-  async pilotOfVehicle(vehicle: Vehicle): Promise<Person> {
-    const query = await this.vehicleRepository
+  pilotOfVehicles = async (ids: string[]) => {
+    const vehicles = await this.vehicleRepository
       .createQueryBuilder('vehicle')
-      .where('vehicle.id = :id', { id: vehicle.id })
       .leftJoinAndSelect('vehicle.pilot', 'people')
-      .getOne();
+      .where('vehicle.id IN (:...ids)', { ids })
+      .getMany();
 
-    return query.pilot;
+    return vehicles.map((vehicle) => vehicle.pilot);
+  };
+
+  async loadPilotForVehicle(vehicle: Vehicle) {
+    return this.peopleLoader.load(vehicle.id);
   }
 }

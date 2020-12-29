@@ -20,11 +20,11 @@ export class VehiclesResolver {
 
   @ResolveField((returns) => Film)
   async film(@Parent() vehicle: Vehicle) {
-    return this.vehiclesService.filmForVehicle(vehicle);
+    return this.vehiclesService.loadFilmForVehicle(vehicle);
   }
 
   @ResolveField((returns) => Person)
   async pilot(@Parent() vehicle: Vehicle) {
-    return this.vehiclesService.pilotOfVehicle(vehicle);
+    return this.vehiclesService.loadPilotForVehicle(vehicle);
   }
 }
