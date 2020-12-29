@@ -18,13 +18,13 @@ export class SpeciesResolver {
     return this.speciesService.find(id);
   }
 
-  @ResolveField((returns) => [Person])
-  async people(@Parent() species: Species) {
-    return this.speciesService.membersOfSpecies(species);
-  }
-
   @ResolveField((returns) => [Film])
   async films(@Parent() species: Species) {
-    return this.speciesService.filmsForSpecies(species);
+    return this.speciesService.loadFilmsForSpecies(species);
+  }
+
+  @ResolveField((returns) => [Person])
+  async people(@Parent() species: Species) {
+    return this.speciesService.loadMembersOfSpecies(species);
   }
 }
