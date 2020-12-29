@@ -35,16 +35,6 @@ type Person {
   pilotOf: [Vehicle!]
 }
 
-type Location {
-  id: String!
-  name: String!
-  climate: String!
-  terrain: String!
-  surface_water: Float!
-  residents: [Person!]!
-  films: [Film!]!
-}
-
 type Film {
   id: String!
   title: String!
@@ -57,6 +47,16 @@ type Film {
   people: [Person!]!
   species: [Species!]!
   locations: [Location!]!
+}
+
+type Location {
+  id: String!
+  name: String!
+  climate: String!
+  terrain: String!
+  surface_water: Float!
+  residents: [Person!]!
+  films: [Film!]!
 }
 
 type Query {

@@ -6,7 +6,6 @@ import { Vehicle } from 'src/vehicles/vehicle.model';
 import {
   Column,
   Entity,
-  JoinColumn,
   JoinTable,
   ManyToMany,
   OneToMany,
