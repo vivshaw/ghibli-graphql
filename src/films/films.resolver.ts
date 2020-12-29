@@ -10,12 +10,16 @@ import { FilmsService } from './films.service';
 export class FilmsResolver {
   constructor(private filmsService: FilmsService) {}
 
-  @Query(() => [Film])
+  @Query(() => [Film], {
+    description: 'Get information about every Studio Ghibli film.',
+  })
   async films() {
     return this.filmsService.all();
   }
 
-  @Query(() => Film)
+  @Query(() => Film, {
+    description: 'Get information about a specific Studio Ghibli film by UUID.',
+  })
   async film(@Args('id') id: string) {
     return this.filmsService.find(id);
   }

@@ -8,12 +8,18 @@ import { Person } from './person.model';
 export class PeopleResolver {
   constructor(private peopleService: PeopleService) {}
 
-  @Query(() => [Person])
+  @Query(() => [Person], {
+    description:
+      'Get information about all characters appearing in Studio Ghibli films.',
+  })
   async people() {
     return this.peopleService.all();
   }
 
-  @Query(() => Person)
+  @Query(() => Person, {
+    description:
+      'Get information about a specific Studio Ghibli character by UUID',
+  })
   async person(@Args('id') id: string) {
     return this.peopleService.find(id);
   }

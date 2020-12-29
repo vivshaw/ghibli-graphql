@@ -8,12 +8,17 @@ import { VehiclesService } from './vehicles.service';
 export class VehiclesResolver {
   constructor(private vehiclesService: VehiclesService) {}
 
-  @Query(() => [Vehicle])
+  @Query(() => [Vehicle], {
+    description:
+      'Get information about all vehicles appearing in Studio Ghibli films.',
+  })
   async vehicles() {
     return this.vehiclesService.all();
   }
 
-  @Query(() => Vehicle)
+  @Query(() => Vehicle, {
+    description: 'Get information about a specific vehicle by UUID',
+  })
   async vehicle(@Args('id') id: string) {
     return this.vehiclesService.find(id);
   }

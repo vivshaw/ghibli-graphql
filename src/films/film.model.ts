@@ -12,53 +12,65 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@ObjectType()
+@ObjectType({ description: 'A Studio Ghibli film' })
 @Entity()
 export class Film {
-  @Field()
+  @Field({ description: 'UUID identifying the film' })
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Field()
+  @Field({ description: 'Title of the film' })
   @Column('varchar', { length: 500, nullable: false })
   title: string;
 
-  @Field()
+  @Field({ description: 'A short description of the film' })
   @Column('text', { nullable: false })
   description: string;
 
-  @Field()
+  @Field({ description: 'Director of the film' })
   @Column('varchar', { length: 60, nullable: false })
   director: string;
 
-  @Field()
+  @Field({ description: 'Producer of the film' })
   @Column('varchar', { length: 60, nullable: false })
   producer: string;
 
-  @Field()
+  @Field({ description: 'Release year of the film' })
   @Column('int', { nullable: false })
   release_date: number;
 
-  @Field()
+  @Field({ description: 'Rotten Tomatoes score for the film' })
   @Column('int', { nullable: false })
   rt_score: number;
 
-  @Field(() => [Vehicle], { nullable: true })
-  @OneToMany(() => Vehicle, (vehicle) => vehicle.film)
-  vehicles: Vehicle[];
+  @Field(() => [Location], {
+    nullable: false,
+    description: 'Locations depicted in the film',
+  })
+  @ManyToMany(() => Location, (location) => location.films)
+  @JoinTable()
+  locations: Location[];
 
-  @Field(() => [Person], { nullable: false })
+  @Field(() => [Person], {
+    nullable: false,
+    description: 'Characters appearing in this film',
+  })
   @ManyToMany(() => Person, (person) => person.films)
   @JoinTable()
   people: Person[];
 
-  @Field(() => [Species], { nullable: false })
+  @Field(() => [Species], {
+    nullable: false,
+    description: 'Species appearing in this film',
+  })
   @ManyToMany(() => Species, (species) => species.films)
   @JoinTable()
   species: Species[];
 
-  @Field(() => [Location], { nullable: false })
-  @ManyToMany(() => Location, (location) => location.films)
-  @JoinTable()
-  locations: Location[];
+  @Field(() => [Vehicle], {
+    nullable: true,
+    description: 'Vehicles appearing in this film',
+  })
+  @OneToMany(() => Vehicle, (vehicle) => vehicle.film)
+  vehicles: Vehicle[];
 }

@@ -8,12 +8,17 @@ import { SpeciesService } from './species.service';
 export class SpeciesResolver {
   constructor(private speciesService: SpeciesService) {}
 
-  @Query(() => [Species])
+  @Query(() => [Species], {
+    description:
+      'Get information about all species appearing in Studio Ghibli films.',
+  })
   async allSpecies() {
     return this.speciesService.all();
   }
 
-  @Query(() => Species)
+  @Query(() => Species, {
+    description: 'Get information about a specific species by UUID',
+  })
   async species(@Args('id') id: string) {
     return this.speciesService.find(id);
   }

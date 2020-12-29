@@ -7,12 +7,17 @@ import { LocationsService } from './locations.service';
 export class LocationsResolver {
   constructor(private locationsService: LocationsService) {}
 
-  @Query(() => [Location])
+  @Query(() => [Location], {
+    description:
+      'Get information about all locations appearing in Studio Ghibli films',
+  })
   async locations() {
     return this.locationsService.all();
   }
 
-  @Query(() => Location)
+  @Query(() => Location, {
+    description: 'Get information about a specific location by UUID.',
+  })
   async location(@Args('id') id: string) {
     return this.locationsService.find(id);
   }

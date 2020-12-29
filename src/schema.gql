@@ -2,72 +2,181 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+"""A species appearing in a Studio Ghibli film."""
 type Species {
+  """UUID identifying the species"""
   id: String!
+
+  """Name of the species"""
   name: String!
+
+  """Classification of the species"""
   classification: String!
+
+  """Eye colors of the species"""
   eye_colors: String!
+
+  """Hair colors of the species"""
   hair_colors: String!
+
+  """Films in which this species is found."""
   films: [Film!]!
+
+  """Characters belonging to this species"""
   people: [Person!]!
 }
 
+"""
+A vehicle, such as a car,s hip or plane, appearing in a Studio Ghibli film.
+"""
 type Vehicle {
+  """UUID identifying the vehicle"""
   id: String!
+
+  """Name of the vehicle"""
   name: String!
+
+  """A short description of the vehicle"""
   description: String!
+
+  """Class of the vehicle"""
   vehicle_class: String!
+
+  """Length of the vehicle, in feet"""
   length: Float!
+
+  """Character who pilots this vehicle"""
   pilot: Person!
+
+  """Films in which this vehicle appears"""
   film: Film!
 }
 
+"""
+A character appearing in a Studio Ghibli film. Includes both human and non-human characters.
+"""
 type Person {
+  """UUID identifying the character"""
   id: String!
+
+  """The character's name"""
   name: String!
+
+  """The character's gender, if any"""
   gender: String!
+
+  """The character's age, if known"""
   age: String!
+
+  """The character's eye color"""
   eye_color: String!
+
+  """The character's hair color, if any"""
   hair_color: String!
+
+  """Films in which this character appears"""
   films: [Film!]!
+
+  """Species to which this character belongs"""
   species: Species!
+
+  """Locations in which this character may be found"""
   locations: [Location!]
+
+  """Vehicles which this character pilots, if any"""
   pilotOf: [Vehicle!]
 }
 
+"""A Studio Ghibli film"""
 type Film {
+  """UUID identifying the film"""
   id: String!
+
+  """Title of the film"""
   title: String!
+
+  """A short description of the film"""
   description: String!
+
+  """Director of the film"""
   director: String!
+
+  """Producer of the film"""
   producer: String!
+
+  """Release year of the film"""
   release_date: Float!
+
+  """Rotten Tomatoes score for the film"""
   rt_score: Float!
-  vehicles: [Vehicle!]
-  people: [Person!]!
-  species: [Species!]!
+
+  """Locations depicted in the film"""
   locations: [Location!]!
+
+  """Characters appearing in this film"""
+  people: [Person!]!
+
+  """Species appearing in this film"""
+  species: [Species!]!
+
+  """Vehicles appearing in this film"""
+  vehicles: [Vehicle!]
 }
 
+"""
+A location featured in a Studio Ghibli film. Among other places, this may include countries, buildings, forests, or bodies of water.
+"""
 type Location {
+  """UUID identifying the location"""
   id: String!
+
+  """Name of the location"""
   name: String!
+
+  """Climate of the location"""
   climate: String!
+
+  """Terrain of the location"""
   terrain: String!
+
+  """Percentage of location's surface covered in water"""
   surface_water: Float!
+
+  """Characters who live in or may be found in this location"""
   residents: [Person!]!
+
+  """Films in which this location appears"""
   films: [Film!]!
 }
 
 type Query {
+  """Get information about every Studio Ghibli film."""
   films: [Film!]!
+
+  """Get information about a specific Studio Ghibli film by UUID."""
   film(id: String!): Film!
+
+  """Get information about all vehicles appearing in Studio Ghibli films."""
   vehicles: [Vehicle!]!
+
+  """Get information about a specific vehicle by UUID"""
   vehicle(id: String!): Vehicle!
+
+  """Get information about all species appearing in Studio Ghibli films."""
   allSpecies: [Species!]!
+
+  """Get information about a specific species by UUID"""
   species(id: String!): Species!
+
+  """Get information about all locations appearing in Studio Ghibli films"""
   locations: [Location!]!
+
+  """Get information about a specific location by UUID."""
   location(id: String!): Location!
+
+  """Get information about all characters appearing in Studio Ghibli films."""
   people: [Person!]!
+
+  """Get information about a specific Studio Ghibli character by UUID"""
   person(id: String!): Person!
 }
