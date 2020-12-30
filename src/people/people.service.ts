@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import * as DataLoader from 'dataloader';
+import DataLoader from 'dataloader';
 import { Film } from 'src/films/film.model';
 import { Location } from 'src/locations/location.model';
 import { Species } from 'src/species/species.model';
