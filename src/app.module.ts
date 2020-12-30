@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, OnModuleDestroy } from '@nestjs/common';
 import { FilmsModule } from './films/films.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
@@ -12,7 +12,7 @@ import { GuardModule } from './guards/guard.module';
 import depthLimit from 'graphql-depth-limit';
 import MaxComplexityPlugin from './plugins/MaxComplexityPlugin';
 import responseCachePlugin from 'apollo-server-plugin-response-cache';
-import { RedisCache } from 'apollo-server-cache-redis';
+import Redis from './util/Redis';
 
 @Module({
   imports: [
@@ -21,7 +21,7 @@ import { RedisCache } from 'apollo-server-cache-redis';
       cacheControl: {
         defaultMaxAge: 86400,
       },
-      cache: new RedisCache(process.env.REDIS_URL),
+      cache: Redis,
       context: ({ req, res }) => ({ req, res }),
       introspection: true,
       path: '/',
@@ -41,4 +41,8 @@ import { RedisCache } from 'apollo-server-cache-redis';
   ],
   providers: [MaxComplexityPlugin],
 })
-export class AppModule {}
+export class AppModule implements OnModuleDestroy {
+  onModuleDestroy() {
+    Redis.close();
+  }
+}

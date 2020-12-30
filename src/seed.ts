@@ -7,6 +7,8 @@ async function bootstrap() {
 
   const seeder = await app.get(SeederService);
   await seeder.seed();
+
+  await app.close();
 }
 
 bootstrap();
