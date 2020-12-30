@@ -64,11 +64,12 @@ These are very rudimentary at the moment and will need further tuning.
 
 ## Running it locally
 
-A simple `git clone` and `npm install` will get you started! Then you'll want to do two things:
+A simple `git clone` and `npm install` will get you started! You'll also want to make sure you have PostgresQL and Redis installed. Then you'll want to do these things:
 
-1. Provide POSTGRES_HOST, POSTGRES_USERNAME, POSTGRES_PASSWORD, and POSTGRES_DATABASE as environment variables. I recommend [dotenv](https://www.npmjs.com/package/dotenv).
-2. Set up the initial DB and seed it, with `npm run rb:reset`.
-3. Hoist local dev instance with `npm run start:dev`.
+1. Make sure Postgres is running, and provide `POSTGRES_HOST`, `POSTGRES_USERNAME`, `POSTGRES_PASSWORD`, and `POSTGRES_DATABASE` as environment variables. I recommend [dotenv](https://www.npmjs.com/package/dotenv).
+2. Make sure Redis is running, and provide `REDIS_URL` as an environment variable.
+3. Set up the initial DB and seed it, with `npm run rb:reset`.
+4. Hoist local dev instance with `npm run start:dev`.
 
 You're now live on `localhost:3000` (or environment variable PORT if defined).
 
@@ -90,4 +91,4 @@ TypeScript client app coming Soon™ for glorious full-stack type safety.
 
 ## Resources
 
-This GraphQL API was built in TypeScript using [NestJS](https://nestjs.com/) and [TypeORM](https://typeorm.io/) for maximum comfy. Under the hood, it's using [Express](https://expressjs.com/), [Apollo Server](https://github.com/apollographql/apollo-server), and [Postgres](https://www.postgresql.org/). Deployment is via [Heroku](https://heroku.com/).
+This GraphQL API was built in TypeScript using [NestJS](https://nestjs.com/) and [TypeORM](https://typeorm.io/) for maximum comfy. Under the hood, it's using [Express](https://expressjs.com/), [Apollo Server](https://github.com/apollographql/apollo-server), [Redis](https://redis.io/), and [Postgres](https://www.postgresql.org/). Deployment is via [Heroku](https://heroku.com/).
