@@ -11,11 +11,11 @@ module.exports = {
   migrations: ['dist/migrations/*{.ts,.js}'],
   migrationsTableName: 'migrations_typeorm',
   migrationsRun: true,
+  ssl: true,
   cli: {
     migrationsDir: 'src/migrations',
   },
   extra: {
-    ssl: true,
+    ssl: { rejectUnauthorized: false },
   },
-  ssl: { rejectUnauthorized: false },
 };
