@@ -1,6 +1,6 @@
 {
-  "name": "jiburi-api",
-  "version": "0.6.1",
+  "name": "ghibli-graphql",
+  "version": "0.6.2",
   "description": "",
   "author": "",
   "private": true,
@@ -24,7 +24,7 @@
     "db:migrate": "typeorm migration:run",
     "db:clear": "npm run db:drop && npm run db:migrate",
     "db:reset": "npm run db:clear && npm run db:seed",
-    "postinstall": "npm run build && npm run db:reset"
+    "postbuild": "npm run db:reset"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.4",
